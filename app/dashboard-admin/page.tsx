@@ -25,6 +25,7 @@ interface Stats {
 export default function DashboardAdmin() {
   const { user, logout, isAuthenticated, loading } = useAuth()
   const router = useRouter()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [stats, setStats] = useState<Stats>({
     totalUsuarios: 0,
     pacientes: 0,
@@ -128,13 +129,33 @@ export default function DashboardAdmin() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
+                <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
               </div>
               <span className="text-xl font-bold text-gray-900">Eunonia</span>
               <Badge className="bg-red-100 text-red-700">Administrador</Badge>
             </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Botón hamburguesa mobile */}
+            <div className="flex md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:bg-gray-200 focus:outline-none"
+              >
+                <span className="sr-only">Abrir menú</span>
+                {mobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            {/* Menú desktop */}
+            <div className="hidden md:flex items-center space-x-4">
               <Button variant="ghost" size="sm">
                 <Bell className="w-4 h-4" />
               </Button>
@@ -150,14 +171,36 @@ export default function DashboardAdmin() {
                 </span>
               </div>
               <Button variant="outline" size="sm" onClick={logout}>
-                <a href="/">
-                  Cerrar Sesión
-                </a>
+                <a href="/">Cerrar Sesión</a>
               </Button>
             </div>
           </div>
+
+          {/* Menú mobile */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-2 space-y-2 px-2 pb-3">
+              <div className="flex items-center justify-center md:justify-start space-x-2">
+                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-red-600" />
+                </div>
+                <span className="text-sm font-medium">{user.nombre} {user.apellido}</span>
+              </div>
+              <Button variant="ghost" size="sm" className="w-full">
+                <Bell className="w-4 h-4 mr-2" />
+                Notificaciones
+              </Button>
+              <Button variant="ghost" size="sm" className="w-full">
+                <Settings className="w-4 h-4 mr-2" />
+                Configuración
+              </Button>
+              <Button variant="outline" size="sm" className="w-full" onClick={logout}>
+                <a href="/">Cerrar Sesión</a>
+              </Button>
+            </div>
+          )}
         </div>
       </nav>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -240,7 +283,7 @@ export default function DashboardAdmin() {
         </div>
 
         <Tabs defaultValue="usuarios" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="flex flex-wrap sm:grid sm:grid-cols-4 w-full h-20">
             <TabsTrigger value="usuarios">Gestión de Usuarios</TabsTrigger>
             <TabsTrigger value="seguridad">Seguridad</TabsTrigger>
             <TabsTrigger value="sistema">Sistema</TabsTrigger>

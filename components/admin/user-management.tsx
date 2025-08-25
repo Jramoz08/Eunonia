@@ -253,19 +253,19 @@ export function UserManagement({ onUserUpdate }: UserManagementProps) {
 
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap gap-1.5 md:gap-0 sm:flex-nowrap items-center justify-between">
             <div>
               <CardTitle>Gestión de Usuarios</CardTitle>
               <CardDescription>Administra todos los usuarios del sistema</CardDescription>
             </div>
             <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" onClick={() => exportSystemData("csv")}>
+              <Button className="text-xs" variant="outline" size="sm" onClick={() => exportSystemData("csv")}>
                 <Download className="w-4 h-4 mr-2" />
                 Exportar CSV
               </Button>
               <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="sm">
+                  <Button className="text-xs" size="sm">
                     <Plus className="w-4 h-4 mr-2" />
                     Crear Usuario
                   </Button>
@@ -492,9 +492,9 @@ export function UserManagement({ onUserUpdate }: UserManagementProps) {
             {filteredUsers.map((usuario) => (
               <div
                 key={usuario.id}
-                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex flex-wrap sm:flex-nowrap sm:justify-start items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-wrap justify-center sm:flex-nowrap sm:justify-end items-center space-x-4">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${usuario.rol === "administrador"
                     ? "bg-red-100"
                     : usuario.rol === "psicologo"

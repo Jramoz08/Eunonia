@@ -97,7 +97,7 @@ export function SystemMetricsPanel() {
       {/* Header con estado general */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap justify-end sm:flex-nowrap sm:justify-startitems-center justify-between">
             <div>
               <CardTitle className="flex items-center space-x-2">
                 <Server className="w-5 h-5" />

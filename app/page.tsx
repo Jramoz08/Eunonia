@@ -86,9 +86,9 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-10 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex md:grid flex-col-reverse flex lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
@@ -106,7 +106,7 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start">
                 <Link href="/auth/register">
                   <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3">
                     Comenzar Gratis
@@ -153,7 +153,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="funcionalidades" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="funcionalidades" className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Funcionalidades Diseñadas para Ti</h2>
@@ -246,7 +246,7 @@ export default function LandingPage() {
       </section>
 
       {/* How it Works Section */}
-      <section id="como-funciona" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-50 to-blue-50">
+      <section id="como-funciona" className="py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Cómo Funciona Eunonia</h2>
@@ -293,87 +293,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonios" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Lo que Dicen Nuestros Usuarios</h2>
-            <p className="text-xl text-gray-600">
-              Historias reales de jóvenes profesionales que han transformado su bienestar
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-green-100">
-              <CardContent className="pt-6">
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Eunonia me ayudó a identificar patrones de estrés que no sabía que tenía. Las recomendaciones
-                  personalizadas realmente funcionan."
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <span className="text-green-600 font-semibold">AM</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Ana Martínez</p>
-                    <p className="text-sm text-gray-500">Desarrolladora de Software</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-100">
-              <CardContent className="pt-6">
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "La interfaz es increíblemente intuitiva y no se siente como una 'app de terapia'. Se integra
-                  perfectamente en mi rutina diaria."
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span className="text-blue-600 font-semibold">CL</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Carlos López</p>
-                    <p className="text-sm text-gray-500">Consultor de Marketing</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-purple-100">
-              <CardContent className="pt-6">
-                <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Por fin una plataforma que entiende las presiones específicas de ser un joven profesional. Las
-                  técnicas de manejo del estrés son muy efectivas."
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-semibold">MR</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">María Rodríguez</p>
-                    <p className="text-sm text-gray-500">Analista Financiera</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-blue-600">

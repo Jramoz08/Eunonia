@@ -92,3 +92,16 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* TEST: estilo forzado para verificar si funciona */
+.first_content {
+  background-color: red !important;
+}
+
+@media (max-width: 768px) {
+  .first_content {
+    background-color: blue !important;
+    display: flex !important;
+  }
+}
+
