@@ -8,15 +8,88 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Users, Shield, Settings, Bell, TrendingUp, Activity, Database, BarChart3 } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
 import { useRouter } from "next/navigation"
-import { getSystemStats } from "@/lib/admin"
+import { supabase } from "@/lib/supabaseClient"
 import { UserManagement } from "@/components/admin/user-management"
 import { SecurityPanel } from "@/components/admin/security-panel"
 import { SystemMetricsPanel } from "@/components/admin/system-metrics"
 
+interface Stats {
+  totalUsuarios: number
+  pacientes: number
+  psicologos: number
+  usuariosActivos: number
+  registrosHoy: number
+  registrosMes: number
+}
+
 export default function DashboardAdmin() {
   const { user, logout, isAuthenticated, loading } = useAuth()
   const router = useRouter()
-  const [stats, setStats] = useState(getSystemStats())
+  const [stats, setStats] = useState<Stats>({
+    totalUsuarios: 0,
+    pacientes: 0,
+    psicologos: 0,
+    usuariosActivos: 0,
+    registrosHoy: 0,
+    registrosMes: 0,
+  })
+
+  // Función para obtener estadísticas desde Supabase
+  async function fetchStats() {
+    // Obtener total de usuarios
+    const { count: totalUsuarios } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .eq("activo", true)
+
+    // Contar pacientes activos
+    const { count: pacientes } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .eq("rol", "paciente")
+      .eq("activo", true)
+
+    // Contar psicologos activos
+    const { count: psicologos } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .eq("rol", "psicologo")
+      .eq("activo", true)
+
+    // Usuarios activos (puedes definir qué es "activo", aquí supongo "activo = true")
+    const { count: usuariosActivos } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .eq("activo", true)
+
+    // Registros de hoy
+    const startOfToday = new Date()
+    startOfToday.setHours(0, 0, 0, 0)
+
+    const { count: registrosHoy } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .gte("fecha_registro", startOfToday.toISOString())
+      .eq("activo", true)
+
+    // Registros de este mes
+    const now = new Date()
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+    const { count: registrosMes } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .gte("fecha_registro", startOfMonth.toISOString())
+      .eq("activo", true)
+
+    setStats({
+      totalUsuarios: totalUsuarios ?? 0,
+      pacientes: pacientes ?? 0,
+      psicologos: psicologos ?? 0,
+      usuariosActivos: usuariosActivos ?? 0,
+      registrosHoy: registrosHoy ?? 0,
+      registrosMes: registrosMes ?? 0,
+    })
+  }
 
   useEffect(() => {
     if (!loading) {
@@ -24,16 +97,14 @@ export default function DashboardAdmin() {
         router.push("/auth/login")
         return
       }
-      // Cargar estadísticas iniciales
-      setStats(getSystemStats())
+      fetchStats()
     }
   }, [isAuthenticated, user, router, loading])
 
   const handleStatsUpdate = () => {
-    setStats(getSystemStats())
+    fetchStats()
   }
 
-  // Mostrar loading mientras se verifica la autenticación
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-red-50 to-orange-50 flex items-center justify-center">
@@ -45,7 +116,6 @@ export default function DashboardAdmin() {
     )
   }
 
-  // Redirigir si no es administrador
   if (!user || user.rol !== "administrador") {
     return null
   }
@@ -57,10 +127,10 @@ export default function DashboardAdmin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex items-center justify-center">
-                <Shield className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
               </div>
-              <span className="text-xl font-bold text-gray-900">MentalWell</span>
+              <span className="text-xl font-bold text-gray-900">Eunonia</span>
               <Badge className="bg-red-100 text-red-700">Administrador</Badge>
             </div>
 
@@ -80,7 +150,9 @@ export default function DashboardAdmin() {
                 </span>
               </div>
               <Button variant="outline" size="sm" onClick={logout}>
-                Cerrar Sesión
+                <a href="/">
+                  Cerrar Sesión
+                </a>
               </Button>
             </div>
           </div>
@@ -91,7 +163,7 @@ export default function DashboardAdmin() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Panel de Administración 🛡️</h1>
-          <p className="text-gray-600">Gestión completa del sistema y usuarios de MentalWell</p>
+          <p className="text-gray-600">Gestión completa del sistema y usuarios de Eunonia</p>
         </div>
 
         {/* Quick Stats */}

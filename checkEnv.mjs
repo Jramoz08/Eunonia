@@ -1,0 +1,3 @@
+curl -X POST 'https://apeihomqywcgtqmcrlvr.supabase.co/rest/v1/usuarios' \
+  -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5eW9xbG1nd2Fvc25rb2RmYWxwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzEzODI3MywiZXhwIjoyMDY4NzE0MjczfQ.Hz284s3u1gT3dakBMxzAf_nogqVMcvaQeolG3XK0-ss" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5eW9xbG1nd2Fvc25rb2RmYWxwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzEzODI3MywiZXhwIjoyMDY4NzE0MjczfQ.Hz284s3u1gT3dakBMxzAf_nogqVMcvaQeolG3XK0-ss"

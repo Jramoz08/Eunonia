@@ -1,21 +1,39 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Slider } from "@/components/ui/slider"
 import { Textarea } from "@/components/ui/textarea"
-import { Badge } from "@/components/ui/badge"
-import { Brain, Heart, Zap, Coffee, Moon, Smile, Frown, Meh, ArrowLeft, Save, TrendingUp } from "lucide-react"
+import {
+  Brain,
+  Heart,
+  Zap,
+  Coffee,
+  Moon,
+  Smile,
+  Frown,
+  Meh,
+  ArrowLeft,
+  Save,
+} from "lucide-react"
 import Link from "next/link"
+import { useAuth } from "@/components/auth-provider"
+import { supabase } from "@/lib/supabaseClient"
 
 export default function SeguimientoEmocional() {
-  const [mood, setMood] = useState([7])
-  const [stress, setStress] = useState([4])
-  const [energy, setEnergy] = useState([6])
-  const [sleep, setSleep] = useState([7])
+  const [mood, setMood] = useState<number[]>([7])
+  const [stress, setStress] = useState<number[]>([4])
+  const [energy, setEnergy] = useState<number[]>([6])
+  const [sleep, setSleep] = useState<number[]>([7])
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([])
   const [notes, setNotes] = useState("")
+
+  const [yaRegistroHoy, setYaRegistroHoy] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const supabaseClient = supabase
+  const { user } = useAuth()
 
   const emotions = [
     { name: "Feliz", icon: "😊", color: "bg-yellow-100 text-yellow-700" },
@@ -29,7 +47,9 @@ export default function SeguimientoEmocional() {
   ]
 
   const toggleEmotion = (emotion: string) => {
-    setSelectedEmotions((prev) => (prev.includes(emotion) ? prev.filter((e) => e !== emotion) : [...prev, emotion]))
+    setSelectedEmotions((prev) =>
+      prev.includes(emotion) ? prev.filter((e) => e !== emotion) : [...prev, emotion]
+    )
   }
 
   const getMoodIcon = (value: number) => {
@@ -38,25 +58,88 @@ export default function SeguimientoEmocional() {
     return <Frown className="w-6 h-6 text-red-500" />
   }
 
-  const handleSave = () => {
-    const data = {
-      mood: mood[0],
-      stress: stress[0],
-      energy: energy[0],
-      sleep: sleep[0],
-      emotions: selectedEmotions,
-      notes,
-      timestamp: new Date().toISOString(),
+  // Obtener fecha local en formato YYYY-MM-DD
+  const todayDateOnly = (() => {
+    const today = new Date()
+    return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(
+      today.getDate()
+    ).padStart(2, "0")}`
+  })()
+
+  // Al montar, verifica si ya hay registro hoy
+  useEffect(() => {
+    if (!user) {
+      setYaRegistroHoy(false)
+      setLoading(false)
+      return
     }
 
-    // Simular guardado
-    console.log("Datos guardados:", data)
-    alert("¡Registro guardado exitosamente! 🎉")
+    const verificarRegistro = async () => {
+      setLoading(true)
+      try {
+        const { data, error } = await supabaseClient
+          .from("emotional_records")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("fecha", todayDateOnly)
+          .limit(1)
+
+        if (error) {
+          console.error("Error consultando registros:", error)
+          setYaRegistroHoy(false)
+        } else if (data && data.length > 0) {
+          setYaRegistroHoy(true)
+        } else {
+          setYaRegistroHoy(false)
+        }
+      } catch (error) {
+        console.error("Error al verificar registro:", error)
+        setYaRegistroHoy(false)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    verificarRegistro()
+  }, [user, supabaseClient, todayDateOnly])
+
+  const handleSave = async () => {
+    if (!user) {
+      alert("Debes iniciar sesión para guardar tus registros.")
+      return
+    }
+
+    if (yaRegistroHoy) {
+      alert("Ya tienes un registro para hoy, solo puedes hacer uno por día.")
+      return
+    }
+
+    try {
+      const { error: insertError } = await supabaseClient.from("emotional_records").insert({
+        user_id: user.id,
+        fecha: todayDateOnly,
+        mood: mood[0],
+        stress: stress[0],
+        energy: energy[0],
+        sleep: sleep[0],
+        emociones: selectedEmotions,
+        notas: notes,
+      })
+
+      if (insertError) throw insertError
+
+      alert("¡Registro guardado exitosamente! 🎉")
+      setYaRegistroHoy(true) // Bloquea el registro luego de guardar
+    } catch (error) {
+      console.error(error)
+      alert("Ocurrió un error al guardar el registro.")
+    }
   }
+
+  if (loading) return <p className="p-4 text-center">Cargando...</p>
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-blue-50">
-      {/* Navigation */}
       <nav className="bg-white/80 backdrop-blur-md border-b border-green-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -66,17 +149,14 @@ export default function SeguimientoEmocional() {
             </Link>
 
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">MentalWell</span>
+              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
+              <span className="text-xl font-bold text-gray-900">Eunonia</span>
             </div>
           </div>
         </div>
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Seguimiento Emocional</h1>
           <p className="text-gray-600">
@@ -85,9 +165,8 @@ export default function SeguimientoEmocional() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Form */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Mood Assessment */}
+            {/* Estado de ánimo */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -100,7 +179,15 @@ export default function SeguimientoEmocional() {
                 <div className="flex items-center space-x-4">
                   {getMoodIcon(mood[0])}
                   <div className="flex-1">
-                    <Slider value={mood} onValueChange={setMood} max={10} min={1} step={1} className="w-full" />
+                    <Slider
+                      value={mood}
+                      onValueChange={setMood}
+                      max={10}
+                      min={1}
+                      step={1}
+                      className="w-full"
+                      disabled={yaRegistroHoy}
+                    />
                   </div>
                   <span className="text-2xl font-bold text-green-600">{mood[0]}</span>
                 </div>
@@ -112,7 +199,7 @@ export default function SeguimientoEmocional() {
               </CardContent>
             </Card>
 
-            {/* Stress Level */}
+            {/* Nivel de Estrés */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -131,7 +218,15 @@ export default function SeguimientoEmocional() {
                     ></div>
                   </div>
                   <div className="flex-1">
-                    <Slider value={stress} onValueChange={setStress} max={10} min={1} step={1} className="w-full" />
+                    <Slider
+                      value={stress}
+                      onValueChange={setStress}
+                      max={10}
+                      min={1}
+                      step={1}
+                      className="w-full"
+                      disabled={yaRegistroHoy}
+                    />
                   </div>
                   <span className="text-2xl font-bold text-orange-600">{stress[0]}</span>
                 </div>
@@ -143,7 +238,7 @@ export default function SeguimientoEmocional() {
               </CardContent>
             </Card>
 
-            {/* Energy Level */}
+            {/* Nivel de Energía */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -156,7 +251,15 @@ export default function SeguimientoEmocional() {
                 <div className="flex items-center space-x-4">
                   <Coffee className="w-6 h-6 text-blue-600" />
                   <div className="flex-1">
-                    <Slider value={energy} onValueChange={setEnergy} max={10} min={1} step={1} className="w-full" />
+                    <Slider
+                      value={energy}
+                      onValueChange={setEnergy}
+                      max={10}
+                      min={1}
+                      step={1}
+                      className="w-full"
+                      disabled={yaRegistroHoy}
+                    />
                   </div>
                   <span className="text-2xl font-bold text-blue-600">{energy[0]}</span>
                 </div>
@@ -168,7 +271,7 @@ export default function SeguimientoEmocional() {
               </CardContent>
             </Card>
 
-            {/* Sleep Quality */}
+            {/* Calidad del Sueño */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -181,7 +284,15 @@ export default function SeguimientoEmocional() {
                 <div className="flex items-center space-x-4">
                   <Moon className="w-6 h-6 text-purple-600" />
                   <div className="flex-1">
-                    <Slider value={sleep} onValueChange={setSleep} max={10} min={1} step={1} className="w-full" />
+                    <Slider
+                      value={sleep}
+                      onValueChange={setSleep}
+                      max={10}
+                      min={1}
+                      step={1}
+                      className="w-full"
+                      disabled={yaRegistroHoy}
+                    />
                   </div>
                   <span className="text-2xl font-bold text-purple-600">{sleep[0]}</span>
                 </div>
@@ -193,7 +304,7 @@ export default function SeguimientoEmocional() {
               </CardContent>
             </Card>
 
-            {/* Emotions */}
+            {/* Emociones Específicas */}
             <Card>
               <CardHeader>
                 <CardTitle>Emociones Específicas</CardTitle>
@@ -206,9 +317,12 @@ export default function SeguimientoEmocional() {
                       key={emotion.name}
                       variant={selectedEmotions.includes(emotion.name) ? "default" : "outline"}
                       className={`h-16 flex-col space-y-1 ${
-                        selectedEmotions.includes(emotion.name) ? "bg-green-600 hover:bg-green-700" : "hover:bg-gray-50"
+                        selectedEmotions.includes(emotion.name)
+                          ? "bg-green-600 hover:bg-green-700"
+                          : "hover:bg-gray-50"
                       }`}
                       onClick={() => toggleEmotion(emotion.name)}
+                      disabled={yaRegistroHoy}
                     >
                       <span className="text-lg">{emotion.icon}</span>
                       <span className="text-xs">{emotion.name}</span>
@@ -218,125 +332,64 @@ export default function SeguimientoEmocional() {
               </CardContent>
             </Card>
 
-            {/* Notes */}
+            {/* Notas */}
             <Card>
               <CardHeader>
                 <CardTitle>Notas Adicionales</CardTitle>
-                <CardDescription>¿Hay algo específico que quieras compartir sobre tu día?</CardDescription>
+                <CardDescription>Escribe cualquier detalle adicional sobre cómo te sientes</CardDescription>
               </CardHeader>
               <CardContent>
                 <Textarea
-                  placeholder="Escribe aquí cualquier detalle sobre tu estado emocional, eventos del día, o factores que puedan haber influido en cómo te sientes..."
+                  placeholder="Escribe tus notas aquí..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="min-h-[120px]"
+                  disabled={yaRegistroHoy}
                 />
               </CardContent>
             </Card>
-
-            {/* Save Button */}
-            <div className="flex justify-end">
-              <Button onClick={handleSave} size="lg" className="bg-green-600 hover:bg-green-700">
-                <Save className="w-4 h-4 mr-2" />
-                Guardar Registro
-              </Button>
-            </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Current Summary */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5" />
-                  <span>Resumen Actual</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Estado de Ánimo</span>
-                    <Badge variant="outline" className="bg-green-50 text-green-700">
-                      {mood[0]}/10
-                    </Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Nivel de Estrés</span>
-                    <Badge variant="outline" className="bg-orange-50 text-orange-700">
-                      {stress[0]}/10
-                    </Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Energía</span>
-                    <Badge variant="outline" className="bg-blue-50 text-blue-700">
-                      {energy[0]}/10
-                    </Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Sueño</span>
-                    <Badge variant="outline" className="bg-purple-50 text-purple-700">
-                      {sleep[0]}/10
-                    </Badge>
-                  </div>
-                </div>
-
-                {selectedEmotions.length > 0 && (
-                  <div className="pt-3 border-t">
-                    <p className="text-sm text-gray-600 mb-2">Emociones seleccionadas:</p>
-                    <div className="flex flex-wrap gap-1">
-                      {selectedEmotions.map((emotion) => (
-                        <Badge key={emotion} variant="secondary" className="text-xs">
-                          {emotion}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </CardContent>
+          {/* Panel derecho resumen + guardar */}
+          <div className="space-y-6 sticky top-20">
+            <Card className="p-6">
+              <CardTitle className="mb-2">Resumen del Día</CardTitle>
+              <div className="space-y-2">
+                <p>
+                  <strong>Estado de ánimo:</strong> {mood[0]}
+                </p>
+                <p>
+                  <strong>Energía:</strong> {energy[0]}
+                </p>
+                <p>
+                  <strong>Estrés:</strong> {stress[0]}
+                </p>
+                <p>
+                  <strong>Sueño:</strong> {sleep[0]}
+                </p>
+                <p>
+                  <strong>Emociones:</strong>{" "}
+                  {selectedEmotions.length > 0 ? selectedEmotions.join(", ") : "Ninguna seleccionada"}
+                </p>
+                <p>
+                  <strong>Notas:</strong> {notes || "Ninguna"}
+                </p>
+              </div>
             </Card>
 
-            {/* Tips */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Consejos para el Seguimiento</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-gray-600">
-                <div className="flex items-start space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                  <p>Registra tu estado al menos una vez al día para obtener mejores insights</p>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                  <p>Sé honesto contigo mismo, no hay respuestas correctas o incorrectas</p>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                  <p>Las notas adicionales ayudan a identificar patrones y triggers</p>
-                </div>
-              </CardContent>
-            </Card>
+            <Button
+              onClick={handleSave}
+              disabled={yaRegistroHoy}
+              className="w-full flex items-center justify-center space-x-2"
+            >
+              <Save className="w-5 h-5" />
+              <span>Guardar Registro</span>
+            </Button>
 
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Acciones Rápidas</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Link href="/recomendaciones">
-                  <Button variant="outline" className="w-full justify-start bg-transparent">
-                    <Brain className="w-4 h-4 mr-2" />
-                    Ver Recomendaciones
-                  </Button>
-                </Link>
-                <Link href="/recursos">
-                  <Button variant="outline" className="w-full justify-start bg-transparent">
-                    <Heart className="w-4 h-4 mr-2" />
-                    Recursos de Apoyo
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+            {yaRegistroHoy && (
+              <p className="text-sm text-center text-red-600">
+                Ya has registrado tus emociones para hoy. Solo puedes registrar una vez al día.
+              </p>
+            )}
           </div>
         </div>
       </div>

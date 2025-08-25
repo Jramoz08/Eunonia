@@ -1,4 +1,4 @@
-# 🧠 MentalWell - Plataforma de Salud Mental
+# 🧠 Eunonia - Plataforma de Salud Mental
 
 Una plataforma innovadora de gestión de salud mental y bienestar personal diseñada específicamente para jóvenes profesionales, con análisis de datos avanzado y machine learning.
 
@@ -61,8 +61,8 @@ Una plataforma innovadora de gestión de salud mental y bienestar personal dise�
 
 ### 1. Clonar el Repositorio
 \`\`\`bash
-git clone https://github.com/tu-usuario/mentalwell-platform.git
-cd mentalwell-platform
+git clone https://github.com/tu-usuario/Eunonia-platform.git
+cd Eunonia-platform
 \`\`\`
 
 ### 2. Instalar Dependencias Frontend
@@ -86,12 +86,12 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
 
 # MongoDB
-MONGODB_URI=mongodb://localhost:27017/mentalwell
+MONGODB_URI=mongodb://localhost:27017/Eunonia
 # o para MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/mentalwell
+# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/Eunonia
 
 # NextAuth
-NEXTAUTH_SECRET=tu_secret_key_aqui
+NEXTAUTH_SECRET=sujPFQw2hVYk1tes58Tj3fjobcNyDi0odBxwAxikljY=  
 NEXTAUTH_URL=http://localhost:3000
 \`\`\`
 
@@ -117,17 +117,17 @@ La aplicación estará disponible en `http://localhost:3000`
 ## 👥 Usuarios de Prueba
 
 ### Administrador del Sistema
-- **Email**: admin@mentalwell.com
+- **Email**: admin@Eunonia.com
 - **Contraseña**: cualquier texto
 - **Funciones**: Gestión completa del sistema, usuarios y configuración
 
 ### Psicólogo
-- **Email**: psicologo@mentalwell.com
+- **Email**: psicologo@Eunonia.com
 - **Contraseña**: cualquier texto
 - **Funciones**: Gestión de pacientes, evaluaciones y terapias
 
 ### Paciente
-- **Email**: paciente@mentalwell.com
+- **Email**: paciente@Eunonia.com
 - **Contraseña**: cualquier texto
 - **Funciones**: Autodiagnóstico, seguimiento y recursos
 
@@ -142,7 +142,7 @@ La aplicación estará disponible en `http://localhost:3000`
   nombre: String,
   apellido: String,
   rol: "paciente" | "psicologo" | "administrador",
-  fechaRegistro: Date,
+  fecha_registro: Date,
   activo: Boolean,
   especialidad?: String, // Solo psicólogos
   numeroLicencia?: String // Solo psicólogos
@@ -316,7 +316,7 @@ CREATE TABLE recomendaciones (
 
 ### Estructura de Carpetas
 \`\`\`
-mentalwell-platform/
+Eunonia-platform/
 ├── app/                    # Next.js App Router
 │   ├── auth/              # Autenticación
 │   ├── dashboard/         # Dashboard paciente
@@ -336,10 +336,10 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ## 📞 Soporte
 
-- **Email**: soporte@mentalwell.com
-- **Documentación**: [docs.mentalwell.com](https://docs.mentalwell.com)
-- **Issues**: [GitHub Issues](https://github.com/tu-usuario/mentalwell-platform/issues)
-- **Discord**: [Comunidad MentalWell](https://discord.gg/mentalwell)
+- **Email**: soporte@Eunonia.com
+- **Documentación**: [docs.Eunonia.com](https://docs.Eunonia.com)
+- **Issues**: [GitHub Issues](https://github.com/tu-usuario/Eunonia-platform/issues)
+- **Discord**: [Comunidad Eunonia](https://discord.gg/Eunonia)
 
 ## 🙏 Agradecimientos
 
@@ -351,4 +351,4 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ---
 
-**MentalWell** - Transformando la salud mental a través de la tecnología 🧠💚
+**Eunonia** - Transformando la salud mental a través de la tecnología 🧠💚

@@ -92,3 +92,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.bg-white{
+  background-color: #fff !important;
+}

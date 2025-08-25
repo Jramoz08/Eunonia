@@ -1,0 +1,208 @@
+{
+  "generated_at": "2025-08-06T19:42:14.749939",
+  "summary": {
+    "total_users": 8,
+    "total_records": 68,
+    "mood_patterns": {
+      "mood_by_day": {
+        "mood_mean": {
+          "Friday": 5.58,
+          "Monday": 6.82,
+          "Saturday": 5.97,
+          "Sunday": 6.82,
+          "Thursday": 5.28,
+          "Tuesday": 6.08,
+          "Wednesday": 5.84
+        },
+        "mood_std": {
+          "Friday": 1.09,
+          "Monday": 1.36,
+          "Saturday": 1.53,
+          "Sunday": 1.94,
+          "Thursday": 1.27,
+          "Tuesday": 1.2,
+          "Wednesday": 1.06
+        },
+        "stress_mean": {
+          "Friday": 4.53,
+          "Monday": 4.75,
+          "Saturday": 4.64,
+          "Sunday": 3.47,
+          "Thursday": 4.28,
+          "Tuesday": 5.22,
+          "Wednesday": 4.74
+        },
+        "stress_std": {
+          "Friday": 1.45,
+          "Monday": 1.22,
+          "Saturday": 2.11,
+          "Sunday": 1.44,
+          "Thursday": 1.7,
+          "Tuesday": 1.5,
+          "Wednesday": 1.51
+        },
+        "energy_mean": {
+          "Friday": 4.37,
+          "Monday": 5.5,
+          "Saturday": 5.19,
+          "Sunday": 5.43,
+          "Thursday": 4.32,
+          "Tuesday": 5.06,
+          "Wednesday": 4.71
+        },
+        "energy_std": {
+          "Friday": 0.84,
+          "Monday": 1.04,
+          "Saturday": 1.54,
+          "Sunday": 1.42,
+          "Thursday": 1.0,
+          "Tuesday": 1.15,
+          "Wednesday": 0.86
+        }
+      },
+      "weekly_trends": {
+        "mood": {
+          "27": 5.6,
+          "28": 6.17,
+          "29": 5.37,
+          "30": 6.26,
+          "31": 6.61,
+          "32": 7.0
+        },
+        "stress": {
+          "27": 4.95,
+          "28": 4.44,
+          "29": 4.24,
+          "30": 4.31,
+          "31": 4.42,
+          "32": 4.0
+        },
+        "energy": {
+          "27": 4.53,
+          "28": 5.04,
+          "29": 4.34,
+          "30": 4.9,
+          "31": 5.64,
+          "32": 6.0
+        },
+        "sleep": {
+          "27": 6.51,
+          "28": 6.72,
+          "29": 6.82,
+          "30": 6.71,
+          "31": 6.95,
+          "32": 7.0
+        }
+      },
+      "correlations": {
+        "mood": {
+          "mood": 1.0,
+          "stress": -0.15,
+          "energy": 0.94,
+          "sleep": 0.18
+        },
+        "stress": {
+          "mood": -0.15,
+          "stress": 1.0,
+          "energy": -0.11,
+          "sleep": -0.77
+        },
+        "energy": {
+          "mood": 0.94,
+          "stress": -0.11,
+          "energy": 1.0,
+          "sleep": 0.21
+        },
+        "sleep": {
+          "mood": 0.18,
+          "stress": -0.77,
+          "energy": 0.21,
+          "sleep": 1.0
+        }
+      }
+    },
+    "user_clusters": {
+      "Cluster_0": {
+        "size": 1,
+        "avg_mood": 9.0,
+        "avg_stress": 7.0,
+        "description": "Bienestar Variable"
+      },
+      "Cluster_1": {
+        "size": 3,
+        "avg_mood": 5.89,
+        "avg_stress": 4.47,
+        "description": "Bienestar Variable"
+      },
+      "Cluster_2": {
+        "size": 1,
+        "avg_mood": 6.0,
+        "avg_stress": 5.0,
+        "description": "Bienestar Moderado"
+      },
+      "Cluster_3": {
+        "size": 1,
+        "avg_mood": 7.33,
+        "avg_stress": 3.0,
+        "description": "Bienestar Alto"
+      }
+    },
+    "predictions": [
+      {
+        "day": 1,
+        "predicted_mood": 5.8,
+        "confidence": "Alta"
+      },
+      {
+        "day": 2,
+        "predicted_mood": 5.8,
+        "confidence": "Alta"
+      },
+      {
+        "day": 3,
+        "predicted_mood": 5.8,
+        "confidence": "Alta"
+      },
+      {
+        "day": 4,
+        "predicted_mood": 5.8,
+        "confidence": "Alta"
+      },
+      {
+        "day": 5,
+        "predicted_mood": 6.0,
+        "confidence": "Alta"
+      },
+      {
+        "day": 6,
+        "predicted_mood": 5.9,
+        "confidence": "Alta"
+      },
+      {
+        "day": 7,
+        "predicted_mood": 5.8,
+        "confidence": "Alta"
+      }
+    ],
+    "insights": [
+      {
+        "type": "insight",
+        "title": "Relación Estrés-Sueño",
+        "description": "Correlación negativa significativa (-0.77)",
+        "priority": "medium"
+      },
+      {
+        "type": "pattern",
+        "title": "Día de Ánimo Más Bajo",
+        "description": "Los Thursdays son los peores en promedio.",
+        "priority": "low"
+      }
+    ]
+  },
+  "recommendations": [
+    "Implementar técnicas de relajación los días críticos",
+    "Monitorear usuarios en clúster de alto riesgo",
+    "Personalizar intervenciones según clúster",
+    "Observar calidad del sueño como predictor de estrés"
+  ]
+}

@@ -7,9 +7,11 @@ import { AuthProvider } from "@/components/auth-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "MentalWell - Plataforma de Salud Mental",
+  title: "Eunonia ",
   description: "Plataforma integral para el cuidado de la salud mental",
-    generator: 'v0.dev'
+  icons: {
+    icon: "/eunonia_logo.svg", 
+  },
 }
 
 export default function RootLayout({

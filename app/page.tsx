@@ -27,10 +27,8 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">MentalWell</span>
+              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-15" />
+              <span className="text-xl font-bold text-gray-900">Eunonia</span>
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -131,10 +129,7 @@ export default function LandingPage() {
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <span>100% Confidencial</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>Basado en Evidencia</span>
-                </div>
+
                 <div className="flex items-center space-x-1">
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <span>Disponible 24/7</span>
@@ -145,7 +140,7 @@ export default function LandingPage() {
             <div className="relative">
               <div className="relative z-10">
                 <img
-                  src="/placeholder.svg?height=600&width=500"
+                  src="/placeholder.webp?height=600&width=500"
                   alt="Espacio de bienestar y meditación"
                   className="rounded-2xl shadow-2xl"
                 />
@@ -254,7 +249,7 @@ export default function LandingPage() {
       <section id="como-funciona" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Cómo Funciona MentalWell</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Cómo Funciona Eunonia</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Un proceso simple y efectivo diseñado para integrarse perfectamente en tu rutina profesional diaria.
             </p>
@@ -316,7 +311,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "MentalWell me ayudó a identificar patrones de estrés que no sabía que tenía. Las recomendaciones
+                  "Eunonia me ayudó a identificar patrones de estrés que no sabía que tenía. Las recomendaciones
                   personalizadas realmente funcionan."
                 </p>
                 <div className="flex items-center space-x-3">
@@ -415,10 +410,8 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                  <Brain className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">MentalWell</span>
+                <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-15" />
+                <span className="text-xl font-bold">Eunonia</span>
               </div>
               <p className="text-gray-400">
                 Transformando la salud mental de jóvenes profesionales a través de la tecnología.
@@ -436,16 +429,6 @@ export default function LandingPage() {
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
                     Precios
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Seguridad
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    API
                   </a>
                 </li>
               </ul>
@@ -505,7 +488,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MentalWell. Todos los derechos reservados.</p>
+            <p>&copy; 2024 Eunonia. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>

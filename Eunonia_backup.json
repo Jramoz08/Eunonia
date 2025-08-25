@@ -1,0 +1,1222 @@
+{
+  "users": [
+    {
+      "_id": "687ef509274c0e4a4ed343cc",
+      "email": "admin@Eunonia.com",
+      "nombre": "Administrador",
+      "apellido": "Sistema",
+      "rol": "administrador",
+      "activo": true,
+      "fecha_registro": "2025-07-21 21:18:47.535000",
+      "configuracion": {
+        "notificaciones": true,
+        "tema": "claro",
+        "idioma": "es"
+      }
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343cd",
+      "email": "dra.garcia@Eunonia.com",
+      "nombre": "María",
+      "apellido": "García",
+      "rol": "psicologo",
+      "activo": true,
+      "fecha_registro": "2025-06-21 21:18:47.839000",
+      "especialidad": "Psicología Clínica",
+      "numero_licencia": "COL-12345",
+      "telefono": "+34 600 123 456",
+      "pacientes_asignados": [],
+      "horario_disponible": {
+        "lunes": [
+          "09:00",
+          "17:00"
+        ],
+        "martes": [
+          "09:00",
+          "17:00"
+        ],
+        "miercoles": [
+          "09:00",
+          "17:00"
+        ],
+        "jueves": [
+          "09:00",
+          "17:00"
+        ],
+        "viernes": [
+          "09:00",
+          "15:00"
+        ]
+      }
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ce",
+      "email": "dr.martinez@Eunonia.com",
+      "nombre": "Carlos",
+      "apellido": "Martínez",
+      "rol": "psicologo",
+      "activo": true,
+      "fecha_registro": "2025-06-06 21:18:48.172000",
+      "especialidad": "Psicología Laboral",
+      "numero_licencia": "COL-67890",
+      "telefono": "+34 600 789 012",
+      "pacientes_asignados": [],
+      "horario_disponible": {
+        "lunes": [
+          "10:00",
+          "18:00"
+        ],
+        "martes": [
+          "10:00",
+          "18:00"
+        ],
+        "miercoles": [
+          "10:00",
+          "18:00"
+        ],
+        "jueves": [
+          "10:00",
+          "18:00"
+        ],
+        "viernes": [
+          "10:00",
+          "16:00"
+        ]
+      }
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343cf",
+      "email": "ana.lopez@email.com",
+      "nombre": "Ana",
+      "apellido": "López",
+      "rol": "paciente",
+      "activo": true,
+      "fecha_registro": "2025-05-22 21:18:48.505000",
+      "telefono": "+34 600 111 222",
+      "fecha_nacimiento": "1992-05-15 00:00:00",
+      "profesion": "Desarrolladora de Software",
+      "psicologo_asignado": null,
+      "configuracion_privacidad": {
+        "compartir_datos_anonimos": true,
+        "notificaciones_email": true,
+        "notificaciones_push": true
+      }
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d0",
+      "email": "pedro.ruiz@email.com",
+      "nombre": "Pedro",
+      "apellido": "Ruiz",
+      "rol": "paciente",
+      "activo": true,
+      "fecha_registro": "2025-06-11 21:18:48.836000",
+      "telefono": "+34 600 333 444",
+      "fecha_nacimiento": "1988-11-22 00:00:00",
+      "profesion": "Consultor de Marketing",
+      "psicologo_asignado": null,
+      "configuracion_privacidad": {
+        "compartir_datos_anonimos": true,
+        "notificaciones_email": true,
+        "notificaciones_push": false
+      }
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d1",
+      "email": "laura.sanchez@email.com",
+      "nombre": "Laura",
+      "apellido": "Sánchez",
+      "rol": "paciente",
+      "activo": true,
+      "fecha_registro": "2025-07-01 21:18:49.168000",
+      "telefono": "+34 600 555 666",
+      "fecha_nacimiento": "1995-03-08 00:00:00",
+      "profesion": "Diseñadora UX",
+      "psicologo_asignado": null,
+      "configuracion_privacidad": {
+        "compartir_datos_anonimos": false,
+        "notificaciones_email": true,
+        "notificaciones_push": true
+      }
+    }
+  ],
+  "emotional_records": [
+    {
+      "_id": "687ef509274c0e4a4ed343d2",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-21 21:18:49.216000",
+      "mood": 4.8,
+      "stress": 3.6,
+      "energy": 4.1,
+      "sleep": 7.4,
+      "emociones": [
+        "optimista",
+        "ansioso",
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d3",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-15 21:18:49.216000",
+      "mood": 4.4,
+      "stress": 6.5,
+      "energy": 3.6,
+      "sleep": 6.4,
+      "emociones": [
+        "cansado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d4",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-12 21:18:49.216000",
+      "mood": 7.6,
+      "stress": 2.5,
+      "energy": 5.8,
+      "sleep": 7.6,
+      "emociones": [
+        "cansado",
+        "motivado",
+        "ansioso"
+      ],
+      "notas": "Ejercicio matutino me ayudó",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d5",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-11 21:18:49.216000",
+      "mood": 3.3,
+      "stress": 3.8,
+      "energy": 2.6,
+      "sleep": 7.3,
+      "emociones": [
+        "cansado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d6",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-09 21:18:49.216000",
+      "mood": 4.8,
+      "stress": 2.6,
+      "energy": 3.4,
+      "sleep": 6.9,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d7",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-07 21:18:49.216000",
+      "mood": 5.9,
+      "stress": 5.6,
+      "energy": 4.9,
+      "sleep": 6.4,
+      "emociones": [
+        "ansioso",
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d8",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-05 21:18:49.216000",
+      "mood": 7.8,
+      "stress": 3.0,
+      "energy": 6.6,
+      "sleep": 6.9,
+      "emociones": [
+        "cansado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343d9",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-04 21:18:49.216000",
+      "mood": 6.7,
+      "stress": 6.7,
+      "energy": 4.9,
+      "sleep": 6.4,
+      "emociones": [
+        "cansado",
+        "abrumado",
+        "optimista"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343da",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-03 21:18:49.216000",
+      "mood": 4.1,
+      "stress": 3.4,
+      "energy": 2.8,
+      "sleep": 7.3,
+      "emociones": [
+        "motivado",
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343db",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-01 21:18:49.216000",
+      "mood": 6.8,
+      "stress": 6.9,
+      "energy": 5.6,
+      "sleep": 6.1,
+      "emociones": [
+        "motivado",
+        "ansioso",
+        "optimista"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343dc",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-30 21:18:49.216000",
+      "mood": 4.1,
+      "stress": 5.5,
+      "energy": 3.2,
+      "sleep": 6.4,
+      "emociones": [
+        "abrumado",
+        "feliz",
+        "optimista"
+      ],
+      "notas": "Día productivo en el trabajo",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343dd",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-29 21:18:49.216000",
+      "mood": 7.9,
+      "stress": 2.5,
+      "energy": 6.1,
+      "sleep": 7.4,
+      "emociones": [
+        "calmado"
+      ],
+      "notas": "Día productivo en el trabajo",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343de",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-28 21:18:49.216000",
+      "mood": 5.8,
+      "stress": 1.3,
+      "energy": 4.4,
+      "sleep": 7.9,
+      "emociones": [
+        "feliz",
+        "frustrado",
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343df",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-27 21:18:49.216000",
+      "mood": 4.4,
+      "stress": 4.1,
+      "energy": 3.6,
+      "sleep": 6.9,
+      "emociones": [
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e0",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-26 21:18:49.216000",
+      "mood": 7.8,
+      "stress": 6.4,
+      "energy": 5.8,
+      "sleep": 6.3,
+      "emociones": [
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e1",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-06-24 21:18:49.216000",
+      "mood": 6.6,
+      "stress": 2.4,
+      "energy": 5.0,
+      "sleep": 7.2,
+      "emociones": [
+        "abrumado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e2",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-21 21:18:49.216000",
+      "mood": 4.8,
+      "stress": 1.4,
+      "energy": 4.2,
+      "sleep": 7.4,
+      "emociones": [
+        "motivado",
+        "frustrado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e3",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-20 21:18:49.216000",
+      "mood": 5.9,
+      "stress": 7.3,
+      "energy": 4.3,
+      "sleep": 5.7,
+      "emociones": [
+        "frustrado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e4",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-19 21:18:49.216000",
+      "mood": 8.0,
+      "stress": 2.1,
+      "energy": 6.2,
+      "sleep": 7.1,
+      "emociones": [
+        "cansado",
+        "feliz"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e5",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-18 21:18:49.216000",
+      "mood": 3.9,
+      "stress": 4.8,
+      "energy": 2.6,
+      "sleep": 6.7,
+      "emociones": [
+        "calmado",
+        "cansado",
+        "motivado"
+      ],
+      "notas": "Día productivo en el trabajo",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e6",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-16 21:18:49.216000",
+      "mood": 5.3,
+      "stress": 6.2,
+      "energy": 4.1,
+      "sleep": 5.7,
+      "emociones": [
+        "optimista",
+        "feliz"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e7",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-15 21:18:49.216000",
+      "mood": 6.0,
+      "stress": 5.2,
+      "energy": 4.9,
+      "sleep": 6.1,
+      "emociones": [
+        "calmado"
+      ],
+      "notas": "Ejercicio matutino me ayudó",
+      "created_at": "2025-07-21 21:18:49.216000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e8",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-14 21:18:49.216000",
+      "mood": 6.5,
+      "stress": 2.4,
+      "energy": 4.8,
+      "sleep": 7.1,
+      "emociones": [
+        "optimista",
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343e9",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-13 21:18:49.217000",
+      "mood": 7.8,
+      "stress": 2.1,
+      "energy": 6.7,
+      "sleep": 6.9,
+      "emociones": [
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ea",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-11 21:18:49.217000",
+      "mood": 7.1,
+      "stress": 5.9,
+      "energy": 5.7,
+      "sleep": 6.4,
+      "emociones": [
+        "frustrado",
+        "motivado",
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343eb",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-10 21:18:49.217000",
+      "mood": 5.0,
+      "stress": 4.8,
+      "energy": 4.1,
+      "sleep": 6.9,
+      "emociones": [
+        "abrumado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ec",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-09 21:18:49.217000",
+      "mood": 6.3,
+      "stress": 2.0,
+      "energy": 4.7,
+      "sleep": 7.1,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ed",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-07 21:18:49.217000",
+      "mood": 7.5,
+      "stress": 4.9,
+      "energy": 6.2,
+      "sleep": 6.2,
+      "emociones": [
+        "abrumado"
+      ],
+      "notas": "Problemas para dormir",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ee",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-05 21:18:49.217000",
+      "mood": 6.3,
+      "stress": 6.5,
+      "energy": 4.8,
+      "sleep": 5.7,
+      "emociones": [
+        "optimista",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ef",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-04 21:18:49.217000",
+      "mood": 7.3,
+      "stress": 2.7,
+      "energy": 5.7,
+      "sleep": 7.2,
+      "emociones": [
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f0",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-03 21:18:49.217000",
+      "mood": 5.3,
+      "stress": 3.8,
+      "energy": 4.6,
+      "sleep": 6.8,
+      "emociones": [
+        "frustrado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f1",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-02 21:18:49.217000",
+      "mood": 5.0,
+      "stress": 2.0,
+      "energy": 4.2,
+      "sleep": 7.8,
+      "emociones": [
+        "motivado",
+        "feliz",
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f2",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-01 21:18:49.217000",
+      "mood": 4.8,
+      "stress": 5.5,
+      "energy": 4.1,
+      "sleep": 6.7,
+      "emociones": [
+        "frustrado",
+        "cansado",
+        "abrumado"
+      ],
+      "notas": "Problemas para dormir",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f3",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-30 21:18:49.217000",
+      "mood": 4.4,
+      "stress": 4.2,
+      "energy": 3.9,
+      "sleep": 6.9,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "Problemas para dormir",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f4",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-29 21:18:49.217000",
+      "mood": 6.5,
+      "stress": 2.8,
+      "energy": 5.5,
+      "sleep": 7.6,
+      "emociones": [
+        "ansioso",
+        "abrumado"
+      ],
+      "notas": "Problemas para dormir",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f5",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-28 21:18:49.217000",
+      "mood": 6.4,
+      "stress": 2.7,
+      "energy": 5.5,
+      "sleep": 7.2,
+      "emociones": [
+        "motivado",
+        "cansado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f6",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-26 21:18:49.217000",
+      "mood": 3.9,
+      "stress": 4.7,
+      "energy": 2.8,
+      "sleep": 6.8,
+      "emociones": [
+        "calmado"
+      ],
+      "notas": "Mucho estrés por deadlines",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f7",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-25 21:18:49.217000",
+      "mood": 3.4,
+      "stress": 3.8,
+      "energy": 2.5,
+      "sleep": 6.5,
+      "emociones": [
+        "frustrado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f8",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-24 21:18:49.217000",
+      "mood": 5.5,
+      "stress": 4.3,
+      "energy": 4.6,
+      "sleep": 6.3,
+      "emociones": [
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343f9",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-06-22 21:18:49.217000",
+      "mood": 8.2,
+      "stress": 2.5,
+      "energy": 6.6,
+      "sleep": 7.7,
+      "emociones": [
+        "calmado",
+        "feliz",
+        "cansado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343fa",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-21 21:18:49.217000",
+      "mood": 5.7,
+      "stress": 3.7,
+      "energy": 4.9,
+      "sleep": 7.1,
+      "emociones": [
+        "motivado",
+        "feliz",
+        "cansado"
+      ],
+      "notas": "Día productivo en el trabajo",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343fb",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-20 21:18:49.217000",
+      "mood": 6.6,
+      "stress": 6.6,
+      "energy": 5.3,
+      "sleep": 6.0,
+      "emociones": [
+        "abrumado",
+        "feliz"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343fc",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-17 21:18:49.217000",
+      "mood": 5.8,
+      "stress": 2.2,
+      "energy": 4.7,
+      "sleep": 7.1,
+      "emociones": [
+        "frustrado",
+        "abrumado",
+        "feliz"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343fd",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-16 21:18:49.217000",
+      "mood": 7.4,
+      "stress": 7.7,
+      "energy": 5.9,
+      "sleep": 5.4,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343fe",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-15 21:18:49.217000",
+      "mood": 4.7,
+      "stress": 3.0,
+      "energy": 3.4,
+      "sleep": 6.6,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "Día productivo en el trabajo",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed343ff",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-13 21:18:49.217000",
+      "mood": 4.1,
+      "stress": 5.5,
+      "energy": 3.2,
+      "sleep": 6.0,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34400",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-11 21:18:49.217000",
+      "mood": 5.0,
+      "stress": 4.1,
+      "energy": 3.9,
+      "sleep": 7.0,
+      "emociones": [
+        "motivado",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34401",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-08 21:18:49.217000",
+      "mood": 6.2,
+      "stress": 5.9,
+      "energy": 4.7,
+      "sleep": 6.7,
+      "emociones": [
+        "calmado",
+        "feliz"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34402",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-06 21:18:49.217000",
+      "mood": 8.7,
+      "stress": 2.3,
+      "energy": 6.7,
+      "sleep": 7.0,
+      "emociones": [
+        "motivado",
+        "ansioso",
+        "calmado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34403",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-05 21:18:49.217000",
+      "mood": 4.5,
+      "stress": 5.6,
+      "energy": 3.4,
+      "sleep": 6.2,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34404",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-02 21:18:49.217000",
+      "mood": 6.7,
+      "stress": 6.0,
+      "energy": 5.2,
+      "sleep": 6.3,
+      "emociones": [
+        "ansioso"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34405",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-01 21:18:49.217000",
+      "mood": 3.7,
+      "stress": 5.2,
+      "energy": 3.2,
+      "sleep": 6.9,
+      "emociones": [
+        "optimista",
+        "motivado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34406",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-27 21:18:49.217000",
+      "mood": 7.3,
+      "stress": 4.8,
+      "energy": 6.2,
+      "sleep": 6.2,
+      "emociones": [
+        "motivado",
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34407",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-26 21:18:49.217000",
+      "mood": 4.6,
+      "stress": 3.4,
+      "energy": 3.7,
+      "sleep": 6.6,
+      "emociones": [
+        "motivado",
+        "feliz"
+      ],
+      "notas": "Mucho estrés por deadlines",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34408",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-25 21:18:49.217000",
+      "mood": 7.5,
+      "stress": 6.1,
+      "energy": 5.5,
+      "sleep": 5.7,
+      "emociones": [
+        "optimista",
+        "ansioso",
+        "frustrado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34409",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-24 21:18:49.217000",
+      "mood": 5.4,
+      "stress": 3.0,
+      "energy": 4.1,
+      "sleep": 7.3,
+      "emociones": [
+        "ansioso",
+        "cansado"
+      ],
+      "notas": "Mucho estrés por deadlines",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed3440a",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-23 21:18:49.217000",
+      "mood": 6.2,
+      "stress": 4.8,
+      "energy": 5.4,
+      "sleep": 6.7,
+      "emociones": [
+        "cansado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed3440b",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-06-22 21:18:49.217000",
+      "mood": 4.3,
+      "stress": 2.1,
+      "energy": 2.9,
+      "sleep": 7.8,
+      "emociones": [
+        "ansioso",
+        "feliz",
+        "abrumado"
+      ],
+      "notas": "",
+      "created_at": "2025-07-21 21:18:49.217000"
+    }
+  ],
+  "assessments": [
+    {
+      "_id": "687ef509274c0e4a4ed3440c",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "tipo": "autodiagnostico_inicial",
+      "fecha": "2025-05-23 21:18:48.505000",
+      "respuestas": {
+        "estado_animo": 1,
+        "interes_actividades": 3,
+        "ansiedad": 3,
+        "preocupaciones": 2,
+        "estres_laboral": 2,
+        "desconexion_trabajo": 3,
+        "problemas_sueno": 2,
+        "fatiga": 1,
+        "apoyo_social": 0,
+        "autocuidado": 0
+      },
+      "puntuacion_total": 17,
+      "nivel_riesgo": "moderado",
+      "recomendaciones": [
+        "Seguimiento regular del estado emocional",
+        "Practicar mindfulness",
+        "Mejorar higiene del sueño"
+      ],
+      "created_at": "2025-07-21 21:18:49.222000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed3440d",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "tipo": "autodiagnostico_inicial",
+      "fecha": "2025-06-12 21:18:48.836000",
+      "respuestas": {
+        "estado_animo": 2,
+        "interes_actividades": 1,
+        "ansiedad": 1,
+        "preocupaciones": 2,
+        "estres_laboral": 3,
+        "desconexion_trabajo": 2,
+        "problemas_sueno": 3,
+        "fatiga": 1,
+        "apoyo_social": 3,
+        "autocuidado": 3
+      },
+      "puntuacion_total": 21,
+      "nivel_riesgo": "alto",
+      "recomendaciones": [
+        "Buscar apoyo profesional inmediato",
+        "Implementar técnicas de manejo del estrés",
+        "Establecer rutina de autocuidado"
+      ],
+      "created_at": "2025-07-21 21:18:49.222000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed3440e",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "tipo": "autodiagnostico_inicial",
+      "fecha": "2025-07-02 21:18:49.168000",
+      "respuestas": {
+        "estado_animo": 3,
+        "interes_actividades": 1,
+        "ansiedad": 1,
+        "preocupaciones": 2,
+        "estres_laboral": 1,
+        "desconexion_trabajo": 1,
+        "problemas_sueno": 1,
+        "fatiga": 2,
+        "apoyo_social": 0,
+        "autocuidado": 2
+      },
+      "puntuacion_total": 14,
+      "nivel_riesgo": "moderado",
+      "recomendaciones": [
+        "Seguimiento regular del estado emocional",
+        "Practicar mindfulness",
+        "Mejorar higiene del sueño"
+      ],
+      "created_at": "2025-07-21 21:18:49.222000"
+    }
+  ],
+  "recommendations": [
+    {
+      "_id": "687ef509274c0e4a4ed3440f",
+      "user_id": "687ef509274c0e4a4ed343cf",
+      "fecha": "2025-07-21 21:18:49.224000",
+      "recomendaciones": [
+        {
+          "tipo": "movimiento",
+          "titulo": "Rutina Energizante",
+          "descripcion": "Ejercicios suaves para aumentar tu energía",
+          "duracion": "10 min",
+          "prioridad": "media",
+          "efectividad": 88
+        },
+        {
+          "tipo": "mindfulness",
+          "titulo": "Pausa Mindful de 3 Minutos",
+          "descripcion": "Breve práctica de atención plena",
+          "duracion": "3 min",
+          "prioridad": "baja",
+          "efectividad": 78
+        },
+        {
+          "tipo": "movimiento",
+          "titulo": "Estiramientos en el Escritorio",
+          "descripcion": "Alivia la tensión muscular",
+          "duracion": "7 min",
+          "prioridad": "media",
+          "efectividad": 82
+        }
+      ],
+      "estado_base": {
+        "mood": 6.2,
+        "stress": 4.157142857142857,
+        "energy": 4.814285714285715
+      },
+      "algoritmo_version": "1.0",
+      "created_at": "2025-07-21 21:18:49.224000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34410",
+      "user_id": "687ef509274c0e4a4ed343d0",
+      "fecha": "2025-07-21 21:18:49.224000",
+      "recomendaciones": [
+        {
+          "tipo": "movimiento",
+          "titulo": "Rutina Energizante",
+          "descripcion": "Ejercicios suaves para aumentar tu energía",
+          "duracion": "10 min",
+          "prioridad": "media",
+          "efectividad": 88
+        },
+        {
+          "tipo": "mindfulness",
+          "titulo": "Meditación de Gratitud",
+          "descripcion": "Practica la gratitud para mejorar tu estado de ánimo",
+          "duracion": "15 min",
+          "prioridad": "alta",
+          "efectividad": 92
+        },
+        {
+          "tipo": "mindfulness",
+          "titulo": "Pausa Mindful de 3 Minutos",
+          "descripcion": "Breve práctica de atención plena",
+          "duracion": "3 min",
+          "prioridad": "baja",
+          "efectividad": 78
+        },
+        {
+          "tipo": "movimiento",
+          "titulo": "Estiramientos en el Escritorio",
+          "descripcion": "Alivia la tensión muscular",
+          "duracion": "7 min",
+          "prioridad": "media",
+          "efectividad": 82
+        }
+      ],
+      "estado_base": {
+        "mood": 5.471428571428571,
+        "stress": 3.5714285714285716,
+        "energy": 4.485714285714286
+      },
+      "algoritmo_version": "1.0",
+      "created_at": "2025-07-21 21:18:49.224000"
+    },
+    {
+      "_id": "687ef509274c0e4a4ed34411",
+      "user_id": "687ef509274c0e4a4ed343d1",
+      "fecha": "2025-07-21 21:18:49.224000",
+      "recomendaciones": [
+        {
+          "tipo": "movimiento",
+          "titulo": "Rutina Energizante",
+          "descripcion": "Ejercicios suaves para aumentar tu energía",
+          "duracion": "10 min",
+          "prioridad": "media",
+          "efectividad": 88
+        },
+        {
+          "tipo": "mindfulness",
+          "titulo": "Meditación de Gratitud",
+          "descripcion": "Practica la gratitud para mejorar tu estado de ánimo",
+          "duracion": "15 min",
+          "prioridad": "alta",
+          "efectividad": 92
+        },
+        {
+          "tipo": "mindfulness",
+          "titulo": "Pausa Mindful de 3 Minutos",
+          "descripcion": "Breve práctica de atención plena",
+          "duracion": "3 min",
+          "prioridad": "baja",
+          "efectividad": 78
+        },
+        {
+          "tipo": "movimiento",
+          "titulo": "Estiramientos en el Escritorio",
+          "descripcion": "Alivia la tensión muscular",
+          "duracion": "7 min",
+          "prioridad": "media",
+          "efectividad": 82
+        }
+      ],
+      "estado_base": {
+        "mood": 5.571428571428571,
+        "stress": 4.2,
+        "energy": 4.428571428571429
+      },
+      "algoritmo_version": "1.0",
+      "created_at": "2025-07-21 21:18:49.224000"
+    }
+  ],
+  "backup_date": "2025-08-02T21:34:16.718361"
+}

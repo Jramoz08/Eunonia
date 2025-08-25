@@ -6,7 +6,7 @@ import random
 from bson import ObjectId
 
 class MongoDBManager:
-    def __init__(self, connection_string="mongodb://localhost:27017/", db_name="mentalwell"):
+    def __init__(self, connection_string="mongodb://localhost:27017/", db_name="Eunonia"):
         self.client = MongoClient(connection_string)
         self.db = self.client[db_name]
         
@@ -59,7 +59,7 @@ class MongoDBManager:
         test_users = [
             # Administradores
             {
-                "email": "admin@mentalwell.com",
+                "email": "admin@Eunonia.com",
                 "password": self.hash_password("admin123"),
                 "nombre": "Administrador",
                 "apellido": "Sistema",
@@ -75,7 +75,7 @@ class MongoDBManager:
             
             # Psicólogos
             {
-                "email": "dra.garcia@mentalwell.com",
+                "email": "dra.garcia@Eunonia.com",
                 "password": self.hash_password("psicologo123"),
                 "nombre": "María",
                 "apellido": "García",
@@ -95,7 +95,7 @@ class MongoDBManager:
                 }
             },
             {
-                "email": "dr.martinez@mentalwell.com",
+                "email": "dr.martinez@Eunonia.com",
                 "password": self.hash_password("psicologo123"),
                 "nombre": "Carlos",
                 "apellido": "Martínez",
@@ -455,7 +455,7 @@ class MongoDBManager:
         })
         print(f"🧹 {result.deleted_count} sesiones expiradas eliminadas")
     
-    def export_data_backup(self, filename="mentalwell_backup.json"):
+    def export_data_backup(self, filename="Eunonia_backup.json"):
         """Exporta backup de datos"""
         backup_data = {
             "users": list(self.users.find({}, {"password": 0})),  # Excluir contraseñas

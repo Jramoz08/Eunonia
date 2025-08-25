@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route))
 
   // Obtener token de autenticación de las cookies
-  const token = request.cookies.get("mentalwell_current_user")?.value
+  const token = request.cookies.get("Eunonia_current_user")?.value
 
   // Si es una ruta protegida y no hay token, redirigir al login
   if (isProtectedRoute && !token) {

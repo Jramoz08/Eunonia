@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,8 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff, Heart, ArrowLeft } from "lucide-react"
-import { useAuth } from "@/components/auth-provider"
 import Link from "next/link"
+import { useAuth } from "@/components/auth-provider" // Ajusta si tu archivo tiene otro nombre
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -19,8 +17,9 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const { login } = useAuth()
+
   const router = useRouter()
+  const { login } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,31 +27,34 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      const success = await login(email, password)
-      if (success) {
-        // Redirigir según el rol del usuario
-        const userData = JSON.parse(localStorage.getItem("mentalwell_current_user") || "")
-        const user = JSON.parse(localStorage.getItem("mentalwell_users") || "[]").find((u: any) => u.id === userData)
+      const userLogged = await login(email, password)
+      console.log("DEBUG → userLogged:", userLogged)
 
-        if (user) {
-          switch (user.rol) {
-            case "administrador":
-              router.push("/dashboard-admin")
-              break
-            case "psicologo":
-              router.push("/dashboard-psicologo")
-              break
-            case "paciente":
-              router.push("/dashboard")
-              break
-            default:
-              router.push("/dashboard")
-          }
+      if (userLogged) {
+        console.log("DEBUG → redirigiendo según rol:", userLogged.rol)
+
+        switch (userLogged.rol) {
+          case "administrador":
+            router.push("/dashboard-admin")
+            window.location.href = "/dashboard-admin" // fallback
+            break
+          case "psicologo":
+            router.push("/dashboard-psicologo")
+            break
+          case "paciente":
+            router.push("/dashboard")
+            window.location.href = "/dashboard"
+            break
+          default:
+            router.push("/")
+            window.location.href = "/"
+            break
         }
       } else {
         setError("Credenciales incorrectas o cuenta inactiva")
       }
     } catch (err) {
+      console.error("Error al iniciar sesión:", err)
       setError("Error al iniciar sesión. Intenta nuevamente.")
     } finally {
       setLoading(false)
@@ -73,7 +75,7 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Iniciar Sesión</h1>
-          <p className="text-gray-600 mt-2">Accede a tu cuenta de MentalWell</p>
+          <p className="text-gray-600 mt-2">Accede a tu cuenta de Eunonia</p>
         </div>
 
         <Card>
@@ -136,25 +138,6 @@ export default function LoginPage() {
                   Regístrate aquí
                 </Link>
               </p>
-            </div>
-
-            {/* Credenciales de prueba */}
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h4 className="text-sm font-medium text-gray-900 mb-2">Credenciales de prueba:</h4>
-              <div className="text-xs text-gray-600 space-y-1">
-                <p>
-                  <strong>Administrador:</strong> admin@mentalwell.com
-                </p>
-                <p>
-                  <strong>Psicólogo:</strong> psicologo@mentalwell.com
-                </p>
-                <p>
-                  <strong>Paciente:</strong> paciente@mentalwell.com
-                </p>
-                <p>
-                  <strong>Contraseña:</strong> cualquier texto
-                </p>
-              </div>
             </div>
           </CardContent>
         </Card>
