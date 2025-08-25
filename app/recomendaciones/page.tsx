@@ -208,9 +208,9 @@ export default function Recomendaciones() {
         priority: "low",
         steps: [
           { text: "Siéntate en una postura cómoda.", img: "/sitdown.gif" },
-          { text: "Concéntrate en tu respiración natural.", img: "/animations/mindfulbreak_step2.gif" },
-          { text: "Observa tus pensamientos sin juzgar.", img: "/animations/mindfulbreak_step3.gif" },
-          { text: "Abre los ojos lentamente.", img: "/animations/mindfulbreak_step4.gif" },
+          { text: "Concéntrate en tu respiración natural.", img: "/respira.gif" },
+          { text: "Observa tus pensamientos sin juzgar.", img: "/piensa.gif" },
+          { text: "Permanece en estado de presencia.", img: "/animations/mindfulbreak_step4.gif" },
         ],
       },
       {

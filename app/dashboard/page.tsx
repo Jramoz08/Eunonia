@@ -39,6 +39,7 @@ export default function Dashboard() {
   const [weeklyProgress, setWeeklyProgress] = useState<number | null>(null)
   const [weeklyTrend, setWeeklyTrend] = useState<"mejorando" | "empeorando" | null>(null)
   const [weeklyStats, setWeeklyStats] = useState<{ day: string; mood: number; stress: number }[]>([])
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
 
@@ -212,17 +213,37 @@ export default function Dashboard() {
       <nav className="bg-white/80 backdrop-blur-md border-b border-green-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+            {/* Logo */}
             <div className="flex items-center space-x-2">
               <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
               <span className="text-xl font-bold text-gray-900">Eunonia</span>
             </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Botón hamburguesa para móvil */}
+            <div className="flex md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:bg-gray-200 focus:outline-none"
+              >
+                <span className="sr-only">Abrir menú</span>
+                {mobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            {/* Menú desktop */}
+            <div className="hidden md:flex items-center space-x-4">
               <Button variant="ghost" size="sm">
                 <Bell className="w-4 h-4" />
               </Button>
               <UserSettingsPanel />
-
 
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -233,14 +254,33 @@ export default function Dashboard() {
                 </span>
               </div>
               <Button variant="outline" size="sm" onClick={logout}>
-                <a href="/">
-                  Cerrar Sesión
-                </a>
+                <a href="/">Cerrar Sesión</a>
               </Button>
             </div>
           </div>
+
+          {/* Menú móvil */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-2 space-y-2 px-2 pb-3">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-green-600" />
+                </div>
+                <span className="text-sm font-medium">{user?.nombre} {user?.apellido}</span>
+              </div>
+              <Button variant="ghost" size="sm" className="w-full flex items-center justify-center space-x-2">
+                <Bell className="w-4 h-4" />
+                <span>Notificaciones</span>
+              </Button>
+              <UserSettingsPanel />
+              <Button variant="outline" size="sm" className="w-full" onClick={logout}>
+                <a href="/">Cerrar Sesión</a>
+              </Button>
+            </div>
+          )}
         </div>
       </nav>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -354,7 +394,7 @@ export default function Dashboard() {
                     <span>Estado de Ánimo</span>
                     <span>Nivel de Estrés</span>
                   </div>
-                  <div className="grid grid-cols-7 gap-2">
+                  <div className="grid grid-cols-5 md:grid-cols-7 gap-2">
                     {weeklyStats.map((stat, index) => (
                       <div key={index} className="text-center space-y-2">
                         <div className="text-xs font-medium text-gray-500">{stat.day}</div>
