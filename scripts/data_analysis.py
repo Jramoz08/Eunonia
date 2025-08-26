@@ -27,7 +27,7 @@ class MentalHealthAnalyzer:
         df_registros = pd.DataFrame(res_records.data or [])
 
         if df_registros.empty or df_users.empty:
-            print("⚠️ No se encontraron registros o usuarios.")
+            print(" No se encontraron registros o usuarios.")
             return df_users, df_registros
 
         df_registros['fecha'] = pd.to_datetime(df_registros['fecha'])
@@ -182,7 +182,7 @@ class MentalHealthAnalyzer:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
 
-        print(f"✅ Reporte exportado a {filename}")
+        print(f" Reporte exportado a {filename}")
         return report
 
 
@@ -191,29 +191,29 @@ def main():
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
 
     if not url or not key:
-        print("❌ Faltan variables de entorno SUPABASE.")
+        print(" Faltan variables de entorno SUPABASE.")
         return
 
     supabase = create_client(url, key)
     analyzer = MentalHealthAnalyzer()
 
-    print("📥 Cargando datos desde Supabase...")
+    print(" Cargando datos desde Supabase...")
     df_users, df_registros = analyzer.fetch_data(supabase)
 
     if df_users.empty or df_registros.empty:
-        print("⚠️ Datos insuficientes para análisis.")
+        print(" Datos insuficientes para análisis.")
         return
 
-    print("📊 Analizando patrones de estado de ánimo...")
+    print(" Analizando patrones de estado de ánimo...")
     mood_patterns = analyzer.analyze_mood_patterns(df_registros)
 
-    print("👥 Agrupando usuarios...")
+    print("Agrupando usuarios...")
     user_clusters, cluster_info = analyzer.cluster_users(df_users, df_registros)
 
-    print("🔮 Prediciendo tendencias...")
+    print("Prediciendo tendencias...")
     predictions = analyzer.predict_mood_trends(df_registros)
 
-    print("💡 Generando insights...")
+    print("Generando insights...")
     insights = analyzer.generate_insights(df_users, df_registros)
 
     results = {
@@ -225,13 +225,18 @@ def main():
         'insights': insights
     }
 
-    print("📝 Exportando reporte final...")
+    print(" Exportando reporte final...")
     analyzer.export_analysis_report(results)
 
-    print("✅ Análisis completado.")
-    print(f"👥 Usuarios analizados: {len(df_users)}")
-    print(f"📈 Registros emocionales: {len(df_registros)}")
+    print(" Análisis completado.")
+    print(f" Usuarios analizados: {len(df_users)}")
+    print(f" Registros emocionales: {len(df_registros)}")
+
+    return results  
 
 
 if __name__ == "__main__":
-    main()
+    results = main()
+    if results:
+        print(json.dumps(results))  # <-- Esto es clave para leer desde Next.js
+

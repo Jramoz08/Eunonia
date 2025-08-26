@@ -6,6 +6,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress"
 import UserSettingsModal from "@/components/ui/UserSettingsModal"
 import UserSettingsPanel from "@/components/ui/UserSettingsPanel"
+// ⬇️ nuevos imports
+import { Bot } from "lucide-react"
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
 
 import { getEmotionalRecords, EmotionalRecord } from "@/lib/emotional"
 import {
@@ -28,6 +41,29 @@ import Link from "next/link"
 import { useAuth } from "@/components/auth-provider"
 import { useRouter } from "next/navigation"
 
+const daysMap: Record<string, string> = {
+  Monday: "Lunes",
+  Tuesday: "Martes",
+  Wednesday: "Miércoles",
+  Thursday: "Jueves",
+  Friday: "Viernes",
+  Saturday: "Sábado",
+  Sunday: "Domingo"
+};
+
+
+const translateText = (text: string) => {
+  return text
+    .replace(/Monday/g, "Lune")
+    .replace(/Tuesday/g, "Marte")
+    .replace(/Wednesday/g, "Miércole")
+    .replace(/Thursday/g, "Jueve")
+    .replace(/Friday/g, "Vierne")
+    .replace(/Saturday/g, "Sábado")
+    .replace(/Sunday/g, "Domingo");
+};
+
+
 export default function Dashboard() {
   const { user, logout, isAuthenticated } = useAuth()
   const router = useRouter()
@@ -40,6 +76,26 @@ export default function Dashboard() {
   const [weeklyTrend, setWeeklyTrend] = useState<"mejorando" | "empeorando" | null>(null)
   const [weeklyStats, setWeeklyStats] = useState<{ day: string; mood: number; stress: number }[]>([])
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // ⬇️ estado para Análisis AI
+  const [aiData, setAiData] = useState<any>(null)
+  const [loadingAi, setLoadingAi] = useState(false)
+  const [openAiModal, setOpenAiModal] = useState(false)
+
+  // ⬇️ función que llama a tu API y abre el modal
+  const runAiAnalysis = async () => {
+    setLoadingAi(true)
+    try {
+      const res = await fetch("/api/analitycs") // sin .js
+      const json = await res.json()
+      setAiData(json)
+      setOpenAiModal(true)
+    } catch (err) {
+      console.error("Error en análisis:", err)
+    } finally {
+      setLoadingAi(false)
+    }
+  }
+
 
 
 
@@ -424,7 +480,7 @@ export default function Dashboard() {
                 <CardDescription>Herramientas para mejorar tu bienestar ahora mismo</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   <Link href="/seguimiento">
                     <Button variant="outline" className="h-20 flex-col space-y-2 w-full bg-transparent">
                       <Heart className="w-6 h-6" />
@@ -449,6 +505,114 @@ export default function Dashboard() {
                       <span className="text-xs">Recursos</span>
                     </Button>
                   </Link>
+                  {/* ⬇️ Nuevo botón: Análisis AI (no está dentro de <Link>) */}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="h-20 flex-col space-y-2 w-full bg-transparent"
+                    onClick={(e) => {
+                      e.preventDefault()      // evita cualquier navegación “accidental”
+                      e.stopPropagation()
+                      runAiAnalysis()
+                    }}
+                    disabled={loadingAi}
+                  >
+                    <Bot className="w-6 h-6" />
+                    <span className="text-xs">{loadingAi ? "Analizando..." : "Análisis AI"}</span>
+                  </Button>
+
+                  <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
+                    <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle>Tu Análisis Personal</DialogTitle>
+                      </DialogHeader>
+
+                      {loadingAi ? (
+                        <p className="text-gray-500">Cargando análisis...</p>
+                      ) : aiData ? (
+                        <div className="space-y-6">
+
+                          {/* Predicciones */}
+                          {aiData.predictions && (
+                            <div className="p-4 border rounded-lg">
+                              <h3 className="font-semibold">🔮 Predicciones de tu estado de ánimo</h3>
+                              <ul className="list-disc list-inside">
+                                {aiData.predictions.map((p: any, idx: number) => (
+                                  <li key={idx}>
+                                    Día {p.day}: ánimo esperado <strong>{p.predicted_mood}</strong> ({p.confidence})
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Insights */}
+                          {aiData.insights && (
+                            <div className="p-4 border rounded-lg">
+                              <h3 className="font-semibold">💡 Insights sobre ti</h3>
+                              <ul className="list-disc list-inside">
+                                {aiData.insights.map((insight: any, idx: number) => (
+                                  <li key={idx}>
+                                    <strong>{insight.title}:</strong> {translateText(insight.description)}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Tendencias semanales */}
+                          {aiData.weekly_trends && (
+                            <div className="p-4 border rounded-lg">
+                              <h3 className="font-semibold">📈 Tendencias de tus últimas semanas</h3>
+                              <p>Promedios por semana:</p>
+                              <ul className="list-disc list-inside">
+                                {Object.entries(aiData.weekly_trends.mood).map(([week, val]: any) => (
+                                  <li key={week}>
+                                    Semana {week}: ánimo {val}, estrés {aiData.weekly_trends.stress[week]}, energía {aiData.weekly_trends.energy[week]}, sueño {aiData.weekly_trends.sleep[week]}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Patrones por día */}
+                          {aiData.mood_patterns?.mood_by_day && (
+                            <div className="p-4 border rounded-lg">
+                              <h3 className="font-semibold">📅 Patrones por día de la semana</h3>
+                              <ul className="list-disc list-inside">
+                                {Object.entries(aiData.mood_patterns.mood_by_day.mood_mean).map(([day, val]: any) => (
+                                  <li key={day}>
+                                    {daysMap[day] || day}: ánimo promedio {val.toFixed(2)},
+                                    estrés {aiData.mood_patterns.mood_by_day.stress_mean[day].toFixed(2)},
+                                    energía {aiData.mood_patterns.mood_by_day.energy_mean[day].toFixed(2)}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Resumen cluster */}
+                          {aiData.user_clusters && (
+                            <div className="p-4 border rounded-lg">
+                              <h3 className="font-semibold">🌟 Resumen de tu bienestar</h3>
+                              {Object.entries(aiData.user_clusters).map(([cluster, data]: any) => (
+                                <div key={cluster}>
+                                  <p>
+                                    <strong>{data.description}</strong> → ánimo promedio {data.avg_mood}, estrés promedio {data.avg_stress}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                        </div>
+                      ) : (
+                        <p>No se encontraron datos para tu análisis</p>
+                      )}
+                    </DialogContent>
+                  </Dialog>
+
+
                 </div>
               </CardContent>
             </Card>
