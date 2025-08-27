@@ -53,9 +53,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string): Promise<User | null> => {
     try {
       const userData = await loginUserWithPassword(email, password)
+      console.log("➡️ Resultado de loginUserWithPassword:", userData)
       if (userData) {
         setUser(userData)
         setCookie("Eunonia_current_user", userData.id)
+        console.log("✅ Cookie seteada:", document.cookie)
         return userData
       }
       return null
