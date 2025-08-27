@@ -36,18 +36,15 @@ export default function LoginPage() {
         switch (userLogged.rol) {
           case "administrador":
             router.push("/dashboard-admin")
-            window.location.href = "/dashboard-admin" // fallback
             break
           case "psicologo":
             router.push("/dashboard-psicologo")
             break
           case "paciente":
             router.push("/dashboard")
-            window.location.href = "/dashboard"
             break
           default:
             router.push("/")
-            window.location.href = "/"
             break
         }
       } else {
