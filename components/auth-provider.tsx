@@ -97,7 +97,7 @@ function setCookie(name: string, value: string) {
   // Ajuste para cookie segura y con duración de 7 días
   const expires = new Date()
   expires.setDate(expires.getDate() + 7)
-  document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}; Secure; SameSite=Lax`
+  document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`
 }
 
 function getCookie(name: string): string | null {
@@ -108,5 +108,5 @@ function getCookie(name: string): string | null {
 }
 
 function deleteCookie(name: string) {
-  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=Lax`
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
 }
