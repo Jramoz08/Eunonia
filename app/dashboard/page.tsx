@@ -587,15 +587,7 @@ export default function Dashboard() {
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
 
                               {(() => {
-                                const daysOrder = [
-                                  "Monday",
-                                  "Tuesday",
-                                  "Wednesday",
-                                  "Thursday",
-                                  "Friday",
-                                  "Saturday",
-                                  "Sunday",
-                                ];
+                                const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
                                 const weeklyPatterns = daysOrder.map((day) => ({
                                   day: daysMap[day] || day,
