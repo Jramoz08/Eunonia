@@ -594,57 +594,64 @@ export default function Dashboard() {
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
 
-                              {(() => {
-                                const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+                              <ResponsiveContainer width="100%" height={280}>
+                                <AreaChart
+                                  data={(() => {
+                                    // Orden fijo de la semana
+                                    const weekDaysOrder = [
+                                      "Lunes",
+                                      "Martes",
+                                      "Miércoles",
+                                      "Jueves",
+                                      "Viernes",
+                                      "Sábado",
+                                      "Domingo",
+                                    ];
+                                    return weekDaysOrder.map((day) => ({
+                                      day,
+                                      Ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day] ?? 0,
+                                      Estrés: aiData.mood_patterns.mood_by_day.stress_mean[day] ?? 0,
+                                      Energía: aiData.mood_patterns.mood_by_day.energy_mean[day] ?? 0,
+                                    }));
+                                  })()}
+                                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+                                >
+                                  <defs>
+                                    <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorStress" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#86efac" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
+                                    </linearGradient>
+                                  </defs>
 
-                                const weeklyPatterns = daysOrder.map((day) => ({
-                                  day: day,
-                                  Ánimo: (aiData.mood_patterns.mood_by_day.mood_mean?.[day] ?? 0) * 10,
-                                  Estrés: (aiData.mood_patterns.mood_by_day.stress_mean?.[day] ?? 0) * 10,
-                                  Energía: (aiData.mood_patterns.mood_by_day.energy_mean?.[day] ?? 0) * 10,
-                                }));
-
-                                return (
-                                  <ResponsiveContainer width="100%" height={280}>
-                                    <AreaChart data={weeklyPatterns} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-                                      <defs>
-                                        <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
-                                          <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4} />
-                                          <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
-                                        </linearGradient>
-                                        <linearGradient id="colorStress" x1="0" y1="0" x2="0" y2="1">
-                                          <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4} />
-                                          <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0} />
-                                        </linearGradient>
-                                        <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                                          <stop offset="5%" stopColor="#86efac" stopOpacity={0.4} />
-                                          <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
-                                        </linearGradient>
-                                      </defs>
-
-                                      <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-                                      <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
-                                      <Tooltip
-                                        contentStyle={{
-                                          backgroundColor: "white",
-                                          border: "1px solid #e5e7eb",
-                                          borderRadius: "8px",
-                                          fontSize: "0.85rem",
-                                        }}
-                                        formatter={(value: any, name: any) => {
-                                          if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
-                                          if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
-                                          if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
-                                          return value;
-                                        }}
-                                      />
-                                      <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
-                                      <Area type="monotone" dataKey="Estrés" stroke="#ec4899" fill="url(#colorStress)" />
-                                      <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
-                                    </AreaChart>
-                                  </ResponsiveContainer>
-                                );
-                              })()}
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+                                  <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
+                                  <Tooltip
+                                    contentStyle={{
+                                      backgroundColor: "white",
+                                      border: "1px solid #e5e7eb",
+                                      borderRadius: "8px",
+                                      fontSize: "0.85rem",
+                                    }}
+                                    formatter={(value: any, name: any) => {
+                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
+                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
+                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
+                                      return value;
+                                    }}
+                                  />
+                                  <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
+                                  <Area type="monotone" dataKey="Estrés" stroke="#ec4899" fill="url(#colorStress)" />
+                                  <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
+                                </AreaChart>
+                              </ResponsiveContainer>
                             </div>
                           )}
 
@@ -661,13 +668,13 @@ export default function Dashboard() {
                               ))}
                             </div>
                           )}
-
                         </div>
                       ) : (
                         <p className="text-gray-500">No se encontraron datos para tu análisis</p>
                       )}
                     </DialogContent>
                   </Dialog>
+
 
                 </div>
               </CardContent>
