@@ -586,52 +586,65 @@ export default function Dashboard() {
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
 
-                              <ResponsiveContainer width="100%" height={280}>
-                                <AreaChart
-                                  data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
-                                    day: daysMap[day] || day,
-                                    Ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day],
-                                    Estrés: aiData.mood_patterns.mood_by_day.stress_mean[day],
-                                    Energía: aiData.mood_patterns.mood_by_day.energy_mean[day],
-                                  }))}
-                                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-                                >
-                                  <defs>
-                                    <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
-                                      <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4} />
-                                      <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
-                                    </linearGradient>
-                                    <linearGradient id="colorStress" x1="0" y1="0" x2="0" y2="1">
-                                      <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4} />
-                                      <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0} />
-                                    </linearGradient>
-                                    <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                                      <stop offset="5%" stopColor="#86efac" stopOpacity={0.4} />
-                                      <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
-                                    </linearGradient>
-                                  </defs>
+                              {(() => {
+                                const daysOrder = [
+                                  "Monday",
+                                  "Tuesday",
+                                  "Wednesday",
+                                  "Thursday",
+                                  "Friday",
+                                  "Saturday",
+                                  "Sunday",
+                                ];
 
-                                  <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-                                  <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
-                                  <Tooltip
-                                    contentStyle={{
-                                      backgroundColor: "white",
-                                      border: "1px solid #e5e7eb",
-                                      borderRadius: "8px",
-                                      fontSize: "0.85rem",
-                                    }}
-                                    formatter={(value: any, name: any) => {
-                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
-                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
-                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
-                                      return value;
-                                    }}
-                                  />
-                                  <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
-                                  <Area type="monotone" dataKey="Estrés" stroke="#ec4899" fill="url(#colorStress)" />
-                                  <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
-                                </AreaChart>
-                              </ResponsiveContainer>
+                                const weeklyPatterns = daysOrder.map((day) => ({
+                                  day: daysMap[day] || day,
+                                  Ánimo: aiData.mood_patterns.mood_by_day.mood_mean?.[day] ?? 0,
+                                  Estrés: aiData.mood_patterns.mood_by_day.stress_mean?.[day] ?? 0,
+                                  Energía: aiData.mood_patterns.mood_by_day.energy_mean?.[day] ?? 0,
+                                }));
+
+                                return (
+                                  <ResponsiveContainer width="100%" height={280}>
+                                    <AreaChart data={weeklyPatterns} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                                      <defs>
+                                        <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4} />
+                                          <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
+                                        </linearGradient>
+                                        <linearGradient id="colorStress" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4} />
+                                          <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0} />
+                                        </linearGradient>
+                                        <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="5%" stopColor="#86efac" stopOpacity={0.4} />
+                                          <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
+                                        </linearGradient>
+                                      </defs>
+
+                                      <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+                                      <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
+                                      <Tooltip
+                                        contentStyle={{
+                                          backgroundColor: "white",
+                                          border: "1px solid #e5e7eb",
+                                          borderRadius: "8px",
+                                          fontSize: "0.85rem",
+                                        }}
+                                        formatter={(value: any, name: any) => {
+                                          if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
+                                          if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
+                                          if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
+                                          return value;
+                                        }}
+                                      />
+                                      <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
+                                      <Area type="monotone" dataKey="Estrés" stroke="#ec4899" fill="url(#colorStress)" />
+                                      <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
+                                    </AreaChart>
+                                  </ResponsiveContainer>
+                                );
+                              })()}
                             </div>
                           )}
 
