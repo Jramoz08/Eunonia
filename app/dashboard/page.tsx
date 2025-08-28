@@ -6,11 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress"
 import UserSettingsModal from "@/components/ui/UserSettingsModal"
 import UserSettingsPanel from "@/components/ui/UserSettingsPanel"
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar,
-  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
-} from "recharts"
+import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 import { Bot } from "lucide-react"
 
@@ -19,7 +15,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog"
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
@@ -529,9 +524,11 @@ export default function Dashboard() {
                   </Button>
 
                   <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
-                    <DialogContent className="max-w-4xl w-full max-h-[85vh] overflow-y-auto">
+                    <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl">
                       <DialogHeader>
-                        <DialogTitle>Tu Análisis Personal</DialogTitle>
+                        <DialogTitle className="text-xl font-bold text-gray-800">
+                          Tu Análisis Personal
+                        </DialogTitle>
                       </DialogHeader>
 
                       {loadingAi ? (
@@ -541,96 +538,123 @@ export default function Dashboard() {
 
                           {/* Predicciones */}
                           {aiData.predictions && (
-                            <div className="p-4 border rounded-lg">
-                              <h3 className="font-semibold">🔮 Predicciones de tu estado de ánimo</h3>
-                              <ul className="list-disc list-inside">
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">🔮 Predicciones de tu estado de ánimo</h3>
+                              <ul className="list-disc list-inside text-gray-700">
                                 {aiData.predictions.map((p: any, idx: number) => (
                                   <li key={idx}>
-                                    Día {p.day}: ánimo esperado <strong>{p.predicted_mood}</strong> ({p.confidence})
+                                    Día {p.day}: ánimo esperado{" "}
+                                    <strong>{p.predicted_mood}</strong> ({p.confidence})
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
 
-                          {/* Tendencias semanales con gráfico */}
+                          {/* Insights */}
+                          {aiData.insights && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">💡 Insights sobre ti</h3>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {aiData.insights.map((insight: any, idx: number) => (
+                                  <li key={idx}>
+                                    <strong>{insight.title}:</strong>{" "}
+                                    {translateText(insight.description)}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Tendencias semanales */}
                           {aiData.weekly_trends && (
-                            <div className="p-4 border rounded-lg">
-                              <h3 className="font-semibold">📈 Tendencias de tus últimas semanas</h3>
-                              <ResponsiveContainer width="100%" height={300}>
-                                <LineChart data={Object.keys(aiData.weekly_trends.mood).map((week) => ({
-                                  week,
-                                  mood: aiData.weekly_trends.mood[week],
-                                  stress: aiData.weekly_trends.stress[week],
-                                  energy: aiData.weekly_trends.energy[week],
-                                  sleep: aiData.weekly_trends.sleep[week],
-                                }))}>
-                                  <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="week" />
-                                  <YAxis />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Line type="monotone" dataKey="mood" stroke="#8884d8" />
-                                  <Line type="monotone" dataKey="stress" stroke="#82ca9d" />
-                                  <Line type="monotone" dataKey="energy" stroke="#ffc658" />
-                                  <Line type="monotone" dataKey="sleep" stroke="#ff7300" />
-                                </LineChart>
-                              </ResponsiveContainer>
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">📈 Tendencias de tus últimas semanas</h3>
+                              <p className="text-gray-700">Promedios por semana:</p>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {Object.entries(aiData.weekly_trends.mood).map(([week, val]: any) => (
+                                  <li key={week}>
+                                    Semana {week}: ánimo {val}, estrés {aiData.weekly_trends.stress[week]}, energía {aiData.weekly_trends.energy[week]}, sueño {aiData.weekly_trends.sleep[week]}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           )}
 
-                          {/* Patrones por día con gráfico */}
+                          {/* Patrones por día (con gráfico amigable) */}
                           {aiData.mood_patterns?.mood_by_day && (
-                            <div className="p-4 border rounded-lg">
-                              <h3 className="font-semibold">📅 Patrones por día de la semana</h3>
-                              <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
-                                  day,
-                                  mood: aiData.mood_patterns.mood_by_day.mood_mean[day],
-                                  stress: aiData.mood_patterns.mood_by_day.stress_mean[day],
-                                  energy: aiData.mood_patterns.mood_by_day.energy_mean[day],
-                                }))}>
-                                  <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="day" />
-                                  <YAxis />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Bar dataKey="mood" fill="#8884d8" />
-                                  <Bar dataKey="stress" fill="#82ca9d" />
-                                  <Bar dataKey="energy" fill="#ffc658" />
-                                </BarChart>
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
+
+                              <ResponsiveContainer width="100%" height={280}>
+                                <AreaChart
+                                  data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
+                                    day: daysMap[day] || day,
+                                    Ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day],
+                                    Estrés: aiData.mood_patterns.mood_by_day.stress_mean[day],
+                                    Energía: aiData.mood_patterns.mood_by_day.energy_mean[day],
+                                  }))}
+                                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+                                >
+                                  <defs>
+                                    <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorStress" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor="#86efac" stopOpacity={0.4} />
+                                      <stop offset="95%" stopColor="#86efac" stopOpacity={0} />
+                                    </linearGradient>
+                                  </defs>
+
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+                                  <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
+                                  <Tooltip
+                                    contentStyle={{
+                                      backgroundColor: "white",
+                                      border: "1px solid #e5e7eb",
+                                      borderRadius: "8px",
+                                      fontSize: "0.85rem",
+                                    }}
+                                    formatter={(value: any, name: any) => {
+                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
+                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
+                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
+                                      return value;
+                                    }}
+                                  />
+                                  <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
+                                  <Area type="monotone" dataKey="Estrés" stroke="#ec4899" fill="url(#colorStress)" />
+                                  <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
+                                </AreaChart>
                               </ResponsiveContainer>
                             </div>
                           )}
 
-                          {/* Resumen cluster con radar chart */}
+                          {/* Resumen cluster */}
                           {aiData.user_clusters && (
-                            <div className="p-4 border rounded-lg">
-                              <h3 className="font-semibold">🌟 Resumen de tu bienestar</h3>
-                              <ResponsiveContainer width="100%" height={350}>
-                                <RadarChart data={Object.keys(aiData.user_clusters).map((cluster) => ({
-                                  cluster,
-                                  mood: aiData.user_clusters[cluster].avg_mood,
-                                  stress: aiData.user_clusters[cluster].avg_stress,
-                                }))}>
-                                  <PolarGrid />
-                                  <PolarAngleAxis dataKey="cluster" />
-                                  <PolarRadiusAxis />
-                                  <Radar name="Ánimo" dataKey="mood" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                                  <Radar name="Estrés" dataKey="stress" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                                  <Legend />
-                                </RadarChart>
-                              </ResponsiveContainer>
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">🌟 Resumen de tu bienestar</h3>
+                              {Object.entries(aiData.user_clusters).map(([cluster, data]: any) => (
+                                <div key={cluster}>
+                                  <p>
+                                    <strong>{data.description}</strong> → ánimo promedio {data.avg_mood}, estrés promedio {data.avg_stress}
+                                  </p>
+                                </div>
+                              ))}
                             </div>
                           )}
 
                         </div>
                       ) : (
-                        <p>No se encontraron datos para tu análisis</p>
+                        <p className="text-gray-500">No se encontraron datos para tu análisis</p>
                       )}
                     </DialogContent>
                   </Dialog>
-
 
                 </div>
               </CardContent>
