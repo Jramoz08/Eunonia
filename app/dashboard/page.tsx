@@ -54,11 +54,11 @@ const daysMap: Record<string, string> = {
 
 const translateText = (text: string) => {
   return text
-    .replace(/Monday/g, "Lune")
-    .replace(/Tuesday/g, "Marte")
-    .replace(/Wednesday/g, "Miércole")
-    .replace(/Thursday/g, "Jueve")
-    .replace(/Friday/g, "Vierne")
+    .replace(/Monday/g, "Lunes")
+    .replace(/Tuesday/g, "Martes")
+    .replace(/Wednesday/g, "Miércoles")
+    .replace(/Thursday/g, "Jueves")
+    .replace(/Friday/g, "Viernes")
     .replace(/Saturday/g, "Sábado")
     .replace(/Sunday/g, "Domingo");
 };
@@ -181,7 +181,15 @@ export default function Dashboard() {
 
           // ** Aquí calculamos weeklyStats para el gráfico semanal **
 
-          const dayNames = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+          const dayNames = [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado"
+          ];
 
           const last7Days = Array.from({ length: 7 }).map((_, i) => {
             const d = new Date(today)
@@ -590,10 +598,10 @@ export default function Dashboard() {
                                 const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
                                 const weeklyPatterns = daysOrder.map((day) => ({
-                                  day: daysMap[day] || day,
-                                  Ánimo: aiData.mood_patterns.mood_by_day.mood_mean?.[day] ?? 0,
-                                  Estrés: aiData.mood_patterns.mood_by_day.stress_mean?.[day] ?? 0,
-                                  Energía: aiData.mood_patterns.mood_by_day.energy_mean?.[day] ?? 0,
+                                  day: day,
+                                  Ánimo: (aiData.mood_patterns.mood_by_day.mood_mean?.[day] ?? 0) * 10,
+                                  Estrés: (aiData.mood_patterns.mood_by_day.stress_mean?.[day] ?? 0) * 10,
+                                  Energía: (aiData.mood_patterns.mood_by_day.energy_mean?.[day] ?? 0) * 10,
                                 }));
 
                                 return (
