@@ -6,10 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress"
 import UserSettingsModal from "@/components/ui/UserSettingsModal"
 import UserSettingsPanel from "@/components/ui/UserSettingsPanel"
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar
-} from "recharts"
+
 import { Bot } from "lucide-react"
 
 import {
@@ -332,7 +329,7 @@ export default function Dashboard() {
                 <span>Notificaciones</span>
               </Button>
               <div className="d-flex justify-center text-center">
-                <UserSettingsPanel />
+              <UserSettingsPanel />
               </div>
               <Button variant="outline" size="sm" className="w-full" onClick={logout}>
                 <a href="/">Cerrar Sesión</a>
@@ -569,57 +566,32 @@ export default function Dashboard() {
                           {aiData.weekly_trends && (
                             <div className="p-4 border rounded-lg">
                               <h3 className="font-semibold">📈 Tendencias de tus últimas semanas</h3>
-                              <ResponsiveContainer width="100%" height={300}>
-                                <LineChart
-                                  data={Object.keys(aiData.weekly_trends.mood).map((week) => ({
-                                    semana: week,
-                                    ánimo: aiData.weekly_trends.mood[week],
-                                    estrés: aiData.weekly_trends.stress[week],
-                                    energía: aiData.weekly_trends.energy[week],
-                                    sueño: aiData.weekly_trends.sleep[week],
-                                  }))}
-                                >
-                                  <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="semana" />
-                                  <YAxis />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Line type="monotone" dataKey="ánimo" stroke="#22c55e" />
-                                  <Line type="monotone" dataKey="estrés" stroke="#ef4444" />
-                                  <Line type="monotone" dataKey="energía" stroke="#3b82f6" />
-                                  <Line type="monotone" dataKey="sueño" stroke="#a855f7" />
-                                </LineChart>
-                              </ResponsiveContainer>
+                              <p>Promedios por semana:</p>
+                              <ul className="list-disc list-inside">
+                                {Object.entries(aiData.weekly_trends.mood).map(([week, val]: any) => (
+                                  <li key={week}>
+                                    Semana {week}: ánimo {val}, estrés {aiData.weekly_trends.stress[week]}, energía {aiData.weekly_trends.energy[week]}, sueño {aiData.weekly_trends.sleep[week]}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           )}
-
 
                           {/* Patrones por día */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg">
                               <h3 className="font-semibold">📅 Patrones por día de la semana</h3>
-                              <ResponsiveContainer width="100%" height={300}>
-                                <BarChart
-                                  data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
-                                    día: daysMap[day] || day,
-                                    ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day],
-                                    estrés: aiData.mood_patterns.mood_by_day.stress_mean[day],
-                                    energía: aiData.mood_patterns.mood_by_day.energy_mean[day],
-                                  }))}
-                                >
-                                  <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="día" />
-                                  <YAxis />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Bar dataKey="ánimo" fill="#22c55e" />
-                                  <Bar dataKey="estrés" fill="#ef4444" />
-                                  <Bar dataKey="energía" fill="#3b82f6" />
-                                </BarChart>
-                              </ResponsiveContainer>
+                              <ul className="list-disc list-inside">
+                                {Object.entries(aiData.mood_patterns.mood_by_day.mood_mean).map(([day, val]: any) => (
+                                  <li key={day}>
+                                    {daysMap[day] || day}: ánimo promedio {val.toFixed(2)},
+                                    estrés {aiData.mood_patterns.mood_by_day.stress_mean[day].toFixed(2)},
+                                    energía {aiData.mood_patterns.mood_by_day.energy_mean[day].toFixed(2)}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           )}
-
 
                           {/* Resumen cluster */}
                           {aiData.user_clusters && (
