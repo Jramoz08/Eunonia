@@ -82,7 +82,7 @@ export default function Recursos() {
         { text: "Siéntate en una postura cómoda.", img: "/sitdown.gif" },
         { text: "Concéntrate en tu respiración natural.", img: "/respira.gif" },
         { text: "Observa tus pensamientos sin juzgar.", img: "/piensa.gif" },
-        { text: "Permanece en estado de presencia.", img: "/animations/mindfulbreak_step4.gif" },
+        { text: "Permanece en estado de presencia.", img: "/calm.gif" },
       ],
     },
     {
@@ -231,7 +231,7 @@ export default function Recursos() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Recursos de Bienestar</h1>
           <p className="text-gray-600">
-            Contenido curado por profesionales para apoyar tu crecimiento personal y bienestar mental
+            Contenido recomendado por profesionales para apoyar tu crecimiento personal y bienestar mental
           </p>
         </div>
 

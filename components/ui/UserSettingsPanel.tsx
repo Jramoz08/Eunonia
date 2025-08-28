@@ -53,6 +53,8 @@ export default function UserSettingsPanel() {
             <SheetTrigger asChild>
                 <Button variant="ghost" size="sm" aria-label="Abrir configuración de usuario">
                     <Settings className="w-4 h-4" />
+              <span>Configuracion</span>
+
                 </Button>
             </SheetTrigger>
 

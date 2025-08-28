@@ -328,7 +328,9 @@ export default function Dashboard() {
                 <Bell className="w-4 h-4" />
                 <span>Notificaciones</span>
               </Button>
+              <div className="d-flex justify-center text-center">
               <UserSettingsPanel />
+              </div>
               <Button variant="outline" size="sm" className="w-full" onClick={logout}>
                 <a href="/">Cerrar Sesión</a>
               </Button>

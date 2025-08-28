@@ -136,8 +136,8 @@ export default function RegisterPage() {
           </Link>
 
           <div className="flex items-center justify-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 bg-white from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />                
             </div>
             <span className="text-2xl font-bold text-gray-900">Eunonia</span>
           </div>
@@ -210,7 +210,7 @@ export default function RegisterPage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="paciente">Paciente</SelectItem>
-                    <SelectItem value="psicologo">Psicólogo</SelectItem>
+                    {/* <SelectItem value="psicologo">Psicólogo</SelectItem> */}
                   </SelectContent>
                 </Select>
               </div>
@@ -299,7 +299,7 @@ export default function RegisterPage() {
 
               <div className="text-sm text-center text-gray-600">
                 ¿Ya tienes una cuenta?{" "}
-                <Link href="/login" className="text-blue-600 hover:underline">
+                <Link href="/auth/login" className="text-blue-600 hover:underline">
                   Inicia sesión
                 </Link>
               </div>

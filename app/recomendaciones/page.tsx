@@ -210,7 +210,7 @@ export default function Recomendaciones() {
           { text: "Siéntate en una postura cómoda.", img: "/sitdown.gif" },
           { text: "Concéntrate en tu respiración natural.", img: "/respira.gif" },
           { text: "Observa tus pensamientos sin juzgar.", img: "/piensa.gif" },
-          { text: "Permanece en estado de presencia.", img: "/animations/mindfulbreak_step4.gif" },
+          { text: "Permanece en estado de presencia.", img: "/calm.gif" },
         ],
       },
       {

@@ -66,10 +66,11 @@ export default function LoginPage() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Volver al inicio
           </Link>
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-              <Heart className="w-6 h-6 text-white" />
+          <div className="flex items-center  justify-center mb-4">
+            <div className="w-12 h-12 me-2 rounded-full flex items-center justify-center">
+              <img src="/eunonia_logo.svg" alt="eunonia logo" className="w-12 h-12" />
             </div>
+              <h3 className="text-2xl font-bold text-gray-900">Eunonia</h3>
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Iniciar Sesión</h1>
           <p className="text-gray-600 mt-2">Accede a tu cuenta de Eunonia</p>
