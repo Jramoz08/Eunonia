@@ -8,8 +8,10 @@ import UserSettingsModal from "@/components/ui/UserSettingsModal"
 import UserSettingsPanel from "@/components/ui/UserSettingsPanel"
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar
+  BarChart, Bar,
+  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
 } from "recharts"
+
 import { Bot } from "lucide-react"
 
 import {
@@ -527,7 +529,7 @@ export default function Dashboard() {
                   </Button>
 
                   <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
-                    <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+                    <DialogContent className="max-w-4xl w-full max-h-[85vh] overflow-y-auto">
                       <DialogHeader>
                         <DialogTitle>Tu Análisis Personal</DialogTitle>
                       </DialogHeader>
@@ -551,87 +553,74 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Insights */}
-                          {aiData.insights && (
-                            <div className="p-4 border rounded-lg">
-                              <h3 className="font-semibold">💡 Insights sobre ti</h3>
-                              <ul className="list-disc list-inside">
-                                {aiData.insights.map((insight: any, idx: number) => (
-                                  <li key={idx}>
-                                    <strong>{insight.title}:</strong> {translateText(insight.description)}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* Tendencias semanales */}
+                          {/* Tendencias semanales con gráfico */}
                           {aiData.weekly_trends && (
                             <div className="p-4 border rounded-lg">
                               <h3 className="font-semibold">📈 Tendencias de tus últimas semanas</h3>
                               <ResponsiveContainer width="100%" height={300}>
-                                <LineChart
-                                  data={Object.keys(aiData.weekly_trends.mood).map((week) => ({
-                                    semana: week,
-                                    ánimo: aiData.weekly_trends.mood[week],
-                                    estrés: aiData.weekly_trends.stress[week],
-                                    energía: aiData.weekly_trends.energy[week],
-                                    sueño: aiData.weekly_trends.sleep[week],
-                                  }))}
-                                >
+                                <LineChart data={Object.keys(aiData.weekly_trends.mood).map((week) => ({
+                                  week,
+                                  mood: aiData.weekly_trends.mood[week],
+                                  stress: aiData.weekly_trends.stress[week],
+                                  energy: aiData.weekly_trends.energy[week],
+                                  sleep: aiData.weekly_trends.sleep[week],
+                                }))}>
                                   <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="semana" />
+                                  <XAxis dataKey="week" />
                                   <YAxis />
                                   <Tooltip />
                                   <Legend />
-                                  <Line type="monotone" dataKey="ánimo" stroke="#22c55e" />
-                                  <Line type="monotone" dataKey="estrés" stroke="#ef4444" />
-                                  <Line type="monotone" dataKey="energía" stroke="#3b82f6" />
-                                  <Line type="monotone" dataKey="sueño" stroke="#a855f7" />
+                                  <Line type="monotone" dataKey="mood" stroke="#8884d8" />
+                                  <Line type="monotone" dataKey="stress" stroke="#82ca9d" />
+                                  <Line type="monotone" dataKey="energy" stroke="#ffc658" />
+                                  <Line type="monotone" dataKey="sleep" stroke="#ff7300" />
                                 </LineChart>
                               </ResponsiveContainer>
                             </div>
                           )}
 
-
-                          {/* Patrones por día */}
+                          {/* Patrones por día con gráfico */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg">
                               <h3 className="font-semibold">📅 Patrones por día de la semana</h3>
                               <ResponsiveContainer width="100%" height={300}>
-                                <BarChart
-                                  data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
-                                    día: daysMap[day] || day,
-                                    ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day],
-                                    estrés: aiData.mood_patterns.mood_by_day.stress_mean[day],
-                                    energía: aiData.mood_patterns.mood_by_day.energy_mean[day],
-                                  }))}
-                                >
+                                <BarChart data={Object.keys(aiData.mood_patterns.mood_by_day.mood_mean).map((day) => ({
+                                  day,
+                                  mood: aiData.mood_patterns.mood_by_day.mood_mean[day],
+                                  stress: aiData.mood_patterns.mood_by_day.stress_mean[day],
+                                  energy: aiData.mood_patterns.mood_by_day.energy_mean[day],
+                                }))}>
                                   <CartesianGrid strokeDasharray="3 3" />
-                                  <XAxis dataKey="día" />
+                                  <XAxis dataKey="day" />
                                   <YAxis />
                                   <Tooltip />
                                   <Legend />
-                                  <Bar dataKey="ánimo" fill="#22c55e" />
-                                  <Bar dataKey="estrés" fill="#ef4444" />
-                                  <Bar dataKey="energía" fill="#3b82f6" />
+                                  <Bar dataKey="mood" fill="#8884d8" />
+                                  <Bar dataKey="stress" fill="#82ca9d" />
+                                  <Bar dataKey="energy" fill="#ffc658" />
                                 </BarChart>
                               </ResponsiveContainer>
                             </div>
                           )}
 
-
-                          {/* Resumen cluster */}
+                          {/* Resumen cluster con radar chart */}
                           {aiData.user_clusters && (
                             <div className="p-4 border rounded-lg">
                               <h3 className="font-semibold">🌟 Resumen de tu bienestar</h3>
-                              {Object.entries(aiData.user_clusters).map(([cluster, data]: any) => (
-                                <div key={cluster}>
-                                  <p>
-                                    <strong>{data.description}</strong> → ánimo promedio {data.avg_mood}, estrés promedio {data.avg_stress}
-                                  </p>
-                                </div>
-                              ))}
+                              <ResponsiveContainer width="100%" height={350}>
+                                <RadarChart data={Object.keys(aiData.user_clusters).map((cluster) => ({
+                                  cluster,
+                                  mood: aiData.user_clusters[cluster].avg_mood,
+                                  stress: aiData.user_clusters[cluster].avg_stress,
+                                }))}>
+                                  <PolarGrid />
+                                  <PolarAngleAxis dataKey="cluster" />
+                                  <PolarRadiusAxis />
+                                  <Radar name="Ánimo" dataKey="mood" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                  <Radar name="Estrés" dataKey="stress" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+                                  <Legend />
+                                </RadarChart>
+                              </ResponsiveContainer>
                             </div>
                           )}
 
