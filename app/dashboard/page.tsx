@@ -182,13 +182,13 @@ export default function Dashboard() {
           // ** Aquí calculamos weeklyStats para el gráfico semanal **
 
           const dayNames = [
-            "Domingo",
             "Lunes",
             "Martes",
             "Miércoles",
             "Jueves",
             "Viernes",
-            "Sábado"
+            "Sábado",
+            "Domingo"
           ];
 
           const last7Days = Array.from({ length: 7 }).map((_, i) => {

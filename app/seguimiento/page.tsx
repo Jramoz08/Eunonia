@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Slider } from "@/components/ui/slider"
 import { Textarea } from "@/components/ui/textarea"
+import { useRouter } from "next/navigation"
 import {
   Brain,
   Heart,
@@ -28,7 +29,7 @@ export default function SeguimientoEmocional() {
   const [sleep, setSleep] = useState<number[]>([7])
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([])
   const [notes, setNotes] = useState("")
-
+  const router = useRouter()
   const [yaRegistroHoy, setYaRegistroHoy] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -130,6 +131,7 @@ export default function SeguimientoEmocional() {
 
       alert("¡Registro guardado exitosamente! 🎉")
       setYaRegistroHoy(true) // Bloquea el registro luego de guardar
+      router.push("/dashboard")
     } catch (error) {
       console.error(error)
       alert("Ocurrió un error al guardar el registro.")
@@ -212,9 +214,8 @@ export default function SeguimientoEmocional() {
                 <div className="flex items-center space-x-4">
                   <div className="w-6 h-6 flex items-center justify-center">
                     <div
-                      className={`w-4 h-4 rounded-full ${
-                        stress[0] <= 3 ? "bg-green-500" : stress[0] <= 6 ? "bg-yellow-500" : "bg-red-500"
-                      }`}
+                      className={`w-4 h-4 rounded-full ${stress[0] <= 3 ? "bg-green-500" : stress[0] <= 6 ? "bg-yellow-500" : "bg-red-500"
+                        }`}
                     ></div>
                   </div>
                   <div className="flex-1">
@@ -316,11 +317,10 @@ export default function SeguimientoEmocional() {
                     <Button
                       key={emotion.name}
                       variant={selectedEmotions.includes(emotion.name) ? "default" : "outline"}
-                      className={`h-16 flex-col space-y-1 ${
-                        selectedEmotions.includes(emotion.name)
-                          ? "bg-green-600 hover:bg-green-700"
-                          : "hover:bg-gray-50"
-                      }`}
+                      className={`h-16 flex-col space-y-1 ${selectedEmotions.includes(emotion.name)
+                        ? "bg-green-600 hover:bg-green-700"
+                        : "hover:bg-gray-50"
+                        }`}
                       onClick={() => toggleEmotion(emotion.name)}
                       disabled={yaRegistroHoy}
                     >

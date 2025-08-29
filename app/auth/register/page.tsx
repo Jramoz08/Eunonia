@@ -290,7 +290,10 @@ export default function RegisterPage() {
 
               <div className="flex items-center space-x-2">
                 <Checkbox id="terms" checked={acceptTerms} onCheckedChange={(val) => setAcceptTerms(!!val)} />
-                <Label htmlFor="terms">Acepto los términos y condiciones *</Label>
+                <a href="/terminos_condiciones_eunonia.pdf">
+                <b>Acepto los términos y condiciones*</b>
+                </a>
+                <Label htmlFor="terms"></Label>
               </div>
 
               <Button type="submit" className="w-full" disabled={isLoading}>
