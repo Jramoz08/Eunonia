@@ -401,7 +401,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 mt-5 gap-6 mb-8">
           <Card className="border-green-100">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
