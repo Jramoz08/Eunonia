@@ -599,13 +599,13 @@ export default function Dashboard() {
                                   data={(() => {
                                     // Orden fijo de la semana
                                     const weekDaysOrder = [
-                                      "Lunes",
-                                      "Martes",
-                                      "Miércoles",
-                                      "Jueves",
-                                      "Viernes",
-                                      "Sábado",
-                                      "Domingo",
+                                      "Monday",
+                                      "Tuesday",
+                                      "Wednesday",
+                                      "Thursday",
+                                      "Friday",
+                                      "Saturday",
+                                      "Sunday",
                                     ];
                                     return weekDaysOrder.map((day) => ({
                                       day,
@@ -632,7 +632,11 @@ export default function Dashboard() {
                                   </defs>
 
                                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-                                  <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#6b7280" }} />
+                                  <XAxis
+                                    dataKey="day"
+                                    tick={{ fontSize: 12, fill: "#6b7280" }}
+                                    tickFormatter={(day) => daysMap[day] || day}
+                                  />
                                   <Tooltip
                                     contentStyle={{
                                       backgroundColor: "white",
@@ -668,6 +672,18 @@ export default function Dashboard() {
                               ))}
                             </div>
                           )}
+
+                          {aiData.recommendations && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">✅ Recomendaciones</h3>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {aiData.recommendations.map((rec: string, idx: number) => (
+                                  <li key={idx}>{translateText(rec)}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
                         </div>
                       ) : (
                         <p className="text-gray-500">No se encontraron datos para tu análisis</p>
