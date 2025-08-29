@@ -532,9 +532,9 @@ export default function Dashboard() {
                   </Button>
 
                   <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
-                    <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl">
+                    <DialogContent className="w-full sm:max-w-3xl h-[90vh] max-h-[90vh] overflow-y-auto rounded-2xl p-4">
                       <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-gray-800">
+                        <DialogTitle className="text-lg sm:text-xl font-bold text-gray-800">
                           Tu Análisis Personal
                         </DialogTitle>
                       </DialogHeader>
@@ -589,7 +589,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Patrones por día (con gráfico amigable) */}
+                          {/* Patrones por día */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
@@ -597,7 +597,6 @@ export default function Dashboard() {
                               <ResponsiveContainer width="100%" height={280}>
                                 <AreaChart
                                   data={(() => {
-                                    // Orden fijo de la semana
                                     const weekDaysOrder = [
                                       "Monday",
                                       "Tuesday",
@@ -606,13 +605,13 @@ export default function Dashboard() {
                                       "Friday",
                                       "Saturday",
                                       "Sunday",
-                                    ];
+                                    ]
                                     return weekDaysOrder.map((day) => ({
                                       day,
                                       Ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day] ?? 0,
                                       Estrés: aiData.mood_patterns.mood_by_day.stress_mean[day] ?? 0,
                                       Energía: aiData.mood_patterns.mood_by_day.energy_mean[day] ?? 0,
-                                    }));
+                                    }))
                                   })()}
                                   margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
                                 >
@@ -645,10 +644,10 @@ export default function Dashboard() {
                                       fontSize: "0.85rem",
                                     }}
                                     formatter={(value: any, name: any) => {
-                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
-                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
-                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
-                                      return value;
+                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"]
+                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"]
+                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"]
+                                      return value
                                     }}
                                   />
                                   <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
@@ -673,6 +672,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
+                          {/* Recomendaciones */}
                           {aiData.recommendations && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">✅ Recomendaciones</h3>
@@ -683,7 +683,6 @@ export default function Dashboard() {
                               </ul>
                             </div>
                           )}
-
                         </div>
                       ) : (
                         <p className="text-gray-500">No se encontraron datos para tu análisis</p>
