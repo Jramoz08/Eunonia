@@ -400,6 +400,8 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
+        <div className="pt-2"></div>
+
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 mt-5 gap-6 mb-8">
           <Card className="border-green-100">
