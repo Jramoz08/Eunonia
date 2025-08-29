@@ -543,8 +543,7 @@ export default function Dashboard() {
                         <p className="text-gray-500">Cargando análisis...</p>
                       ) : aiData ? (
                         <div className="space-y-6">
-
-                          {/* Predicciones */}
+                          {/* 🔮 Predicciones */}
                           {aiData.predictions && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">🔮 Predicciones de tu estado de ánimo</h3>
@@ -559,7 +558,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Insights */}
+                          {/* 💡 Insights */}
                           {aiData.insights && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">💡 Insights sobre ti</h3>
@@ -574,7 +573,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Tendencias semanales */}
+                          {/* 📈 Tendencias semanales */}
                           {aiData.weekly_trends && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">📈 Tendencias de tus últimas semanas</h3>
@@ -589,7 +588,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Patrones por día */}
+                          {/* 📅 Patrones por día */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
@@ -658,7 +657,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Resumen cluster */}
+                          {/* 🌟 Resumen cluster */}
                           {aiData.user_clusters && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">🌟 Resumen de tu bienestar</h3>
@@ -672,7 +671,7 @@ export default function Dashboard() {
                             </div>
                           )}
 
-                          {/* Recomendaciones */}
+                          {/* ✅ Recomendaciones */}
                           {aiData.recommendations && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-2">✅ Recomendaciones</h3>
@@ -689,6 +688,7 @@ export default function Dashboard() {
                       )}
                     </DialogContent>
                   </Dialog>
+
 
 
                 </div>
