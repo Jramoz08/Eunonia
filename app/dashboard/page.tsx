@@ -399,7 +399,7 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
-        <CardTitle className="my-5">Estado Actual:</CardTitle>
+        <CardTitle className="pt-2 pb-8">Estado Actual:</CardTitle>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
