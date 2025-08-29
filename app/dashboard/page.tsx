@@ -532,7 +532,7 @@ export default function Dashboard() {
                   </Button>
 
                   <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
-                    <DialogContent className="w-full sm:max-w-[62rem] h-[90vh] max-h-[90vh] overflow-y-auto rounded-2xl p-4">
+                    <DialogContent className="w-full sm:max-w-[62rem] h-full max-h-full overflow-y-auto rounded-2xl p-4">
                       <DialogHeader>
                         <DialogTitle className="text-lg sm:text-2xl font-bold text-gray-800">
                           Tu Análisis Personal
