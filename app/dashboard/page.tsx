@@ -48,7 +48,7 @@ const daysMap: Record<string, string> = {
   Thursday: "Jueves",
   Friday: "Viernes",
   Saturday: "Sábado",
-  Sunday: "Domingo"
+  Sunday: "Domingo",
 };
 
 
@@ -532,9 +532,9 @@ export default function Dashboard() {
                   </Button>
 
                   <Dialog open={openAiModal} onOpenChange={setOpenAiModal}>
-                    <DialogContent className="w-full sm:max-w-3xl h-[90vh] max-h-[90vh] overflow-y-auto rounded-2xl p-4">
+                    <DialogContent className="w-full sm:max-w-5xl md:max-w-6xl h-[90vh] max-h-[90vh] overflow-y-auto rounded-2xl p-4">
                       <DialogHeader>
-                        <DialogTitle className="text-lg sm:text-xl font-bold text-gray-800">
+                        <DialogTitle className="text-lg sm:text-2xl font-bold text-gray-800">
                           Tu Análisis Personal
                         </DialogTitle>
                       </DialogHeader>
@@ -543,7 +543,50 @@ export default function Dashboard() {
                         <p className="text-gray-500">Cargando análisis...</p>
                       ) : aiData ? (
                         <div className="space-y-6">
-                          {/* Patrones por día */}
+                          {/* 🔮 Predicciones */}
+                          {aiData.predictions && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">🔮 Predicciones de tu estado de ánimo</h3>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {aiData.predictions.map((p: any, idx: number) => (
+                                  <li key={idx}>
+                                    Día {p.day}: ánimo esperado <strong>{p.predicted_mood}</strong> ({p.confidence})
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* 💡 Insights */}
+                          {aiData.insights && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">💡 Insights sobre ti</h3>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {aiData.insights.map((insight: any, idx: number) => (
+                                  <li key={idx}>
+                                    <strong>{insight.title}:</strong> {translateText(insight.description)}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* 📈 Tendencias semanales */}
+                          {aiData.weekly_trends && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">📈 Tendencias de tus últimas semanas</h3>
+                              <p className="text-gray-700">Promedios por semana:</p>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {Object.entries(aiData.weekly_trends.mood).map(([week, val]: any) => (
+                                  <li key={week}>
+                                    Semana {week}: ánimo {val}, estrés {aiData.weekly_trends.stress[week]}, energía {aiData.weekly_trends.energy[week]}, sueño {aiData.weekly_trends.sleep[week]}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* 📅 Patrones por día */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
@@ -559,15 +602,21 @@ export default function Dashboard() {
                                       "Friday",
                                       "Saturday",
                                       "Sunday",
-                                    ]
+                                    ];
                                     return weekDaysOrder.map((day) => ({
                                       day,
                                       Ánimo: aiData.mood_patterns.mood_by_day.mood_mean[day] ?? 0,
                                       Estrés: aiData.mood_patterns.mood_by_day.stress_mean[day] ?? 0,
                                       Energía: aiData.mood_patterns.mood_by_day.energy_mean[day] ?? 0,
-                                    }))
+                                    }));
                                   })()}
-                                  margin={{ top: 10, right: 20, left: 0, bottom: 30 }}
+                                  margin={{
+                                    top: 10,
+                                    right: 20,
+                                    left: 0,
+                                    bottom:
+                                      typeof window !== "undefined" && window.innerWidth < 640 ? 80 : 30,
+                                  }}
                                 >
                                   <defs>
                                     <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
@@ -587,11 +636,24 @@ export default function Dashboard() {
                                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
                                   <XAxis
                                     dataKey="day"
-                                    tick={{ fontSize: 12, fill: "#6b7280" }}
-                                    tickFormatter={(day) => daysMap[day] || day}
-                                    angle={window.innerWidth < 640 ? -90 : 0} // vertical en mobile
-                                    textAnchor={window.innerWidth < 640 ? "end" : "middle"}
+                                    scale="band"
                                     interval={0}
+                                    allowDecimals={false}
+                                    allowDuplicatedCategory={false}
+                                    tickMargin={8}
+                                    height={
+                                      typeof window !== "undefined" && window.innerWidth < 640 ? 70 : 30
+                                    }
+                                    tick={{
+                                      fontSize:
+                                        typeof window !== "undefined" && window.innerWidth < 640 ? 10 : 12,
+                                      fill: "#6b7280",
+                                    }}
+                                    angle={typeof window !== "undefined" && window.innerWidth < 640 ? -90 : 0}
+                                    textAnchor={
+                                      typeof window !== "undefined" && window.innerWidth < 640 ? "end" : "middle"
+                                    }
+                                    tickFormatter={(day) => daysMap[day] || day}
                                   />
                                   <Tooltip
                                     contentStyle={{
@@ -601,10 +663,10 @@ export default function Dashboard() {
                                       fontSize: "0.85rem",
                                     }}
                                     formatter={(value: any, name: any) => {
-                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"]
-                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"]
-                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"]
-                                      return value
+                                      if (name === "Ánimo") return [`${value.toFixed(1)} 😊`, "Ánimo"];
+                                      if (name === "Estrés") return [`${value.toFixed(1)} 🌸`, "Estrés"];
+                                      if (name === "Energía") return [`${value.toFixed(1)} ⚡`, "Energía"];
+                                      return value;
                                     }}
                                   />
                                   <Area type="monotone" dataKey="Ánimo" stroke="#3b82f6" fill="url(#colorMood)" />
@@ -612,6 +674,32 @@ export default function Dashboard() {
                                   <Area type="monotone" dataKey="Energía" stroke="#22c55e" fill="url(#colorEnergy)" />
                                 </AreaChart>
                               </ResponsiveContainer>
+                            </div>
+                          )}
+
+                          {/* 🌟 Resumen cluster */}
+                          {aiData.user_clusters && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">🌟 Resumen de tu bienestar</h3>
+                              {Object.entries(aiData.user_clusters).map(([cluster, data]: any) => (
+                                <div key={cluster}>
+                                  <p>
+                                    <strong>{data.description}</strong> → ánimo promedio {data.avg_mood}, estrés promedio {data.avg_stress}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* ✅ Recomendaciones */}
+                          {aiData.recommendations && (
+                            <div className="p-4 border rounded-lg bg-white shadow-sm">
+                              <h3 className="font-semibold mb-2">✅ Recomendaciones</h3>
+                              <ul className="list-disc list-inside text-gray-700">
+                                {aiData.recommendations.map((rec: string, idx: number) => (
+                                  <li key={idx}>{translateText(rec)}</li>
+                                ))}
+                              </ul>
                             </div>
                           )}
                         </div>
