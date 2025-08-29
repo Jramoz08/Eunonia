@@ -543,52 +543,7 @@ export default function Dashboard() {
                         <p className="text-gray-500">Cargando análisis...</p>
                       ) : aiData ? (
                         <div className="space-y-6">
-                          {/* 🔮 Predicciones */}
-                          {aiData.predictions && (
-                            <div className="p-4 border rounded-lg bg-white shadow-sm">
-                              <h3 className="font-semibold mb-2">🔮 Predicciones de tu estado de ánimo</h3>
-                              <ul className="list-disc list-inside text-gray-700">
-                                {aiData.predictions.map((p: any, idx: number) => (
-                                  <li key={idx}>
-                                    Día {p.day}: ánimo esperado{" "}
-                                    <strong>{p.predicted_mood}</strong> ({p.confidence})
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* 💡 Insights */}
-                          {aiData.insights && (
-                            <div className="p-4 border rounded-lg bg-white shadow-sm">
-                              <h3 className="font-semibold mb-2">💡 Insights sobre ti</h3>
-                              <ul className="list-disc list-inside text-gray-700">
-                                {aiData.insights.map((insight: any, idx: number) => (
-                                  <li key={idx}>
-                                    <strong>{insight.title}:</strong>{" "}
-                                    {translateText(insight.description)}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* 📈 Tendencias semanales */}
-                          {aiData.weekly_trends && (
-                            <div className="p-4 border rounded-lg bg-white shadow-sm">
-                              <h3 className="font-semibold mb-2">📈 Tendencias de tus últimas semanas</h3>
-                              <p className="text-gray-700">Promedios por semana:</p>
-                              <ul className="list-disc list-inside text-gray-700">
-                                {Object.entries(aiData.weekly_trends.mood).map(([week, val]: any) => (
-                                  <li key={week}>
-                                    Semana {week}: ánimo {val}, estrés {aiData.weekly_trends.stress[week]}, energía {aiData.weekly_trends.energy[week]}, sueño {aiData.weekly_trends.sleep[week]}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* 📅 Patrones por día */}
+                          {/* Patrones por día */}
                           {aiData.mood_patterns?.mood_by_day && (
                             <div className="p-4 border rounded-lg bg-white shadow-sm">
                               <h3 className="font-semibold mb-4">📅 Patrones por día de la semana</h3>
@@ -612,7 +567,7 @@ export default function Dashboard() {
                                       Energía: aiData.mood_patterns.mood_by_day.energy_mean[day] ?? 0,
                                     }))
                                   })()}
-                                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+                                  margin={{ top: 10, right: 20, left: 0, bottom: 30 }}
                                 >
                                   <defs>
                                     <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
@@ -634,6 +589,9 @@ export default function Dashboard() {
                                     dataKey="day"
                                     tick={{ fontSize: 12, fill: "#6b7280" }}
                                     tickFormatter={(day) => daysMap[day] || day}
+                                    angle={window.innerWidth < 640 ? -90 : 0} // vertical en mobile
+                                    textAnchor={window.innerWidth < 640 ? "end" : "middle"}
+                                    interval={0}
                                   />
                                   <Tooltip
                                     contentStyle={{
@@ -656,40 +614,12 @@ export default function Dashboard() {
                               </ResponsiveContainer>
                             </div>
                           )}
-
-                          {/* 🌟 Resumen cluster */}
-                          {aiData.user_clusters && (
-                            <div className="p-4 border rounded-lg bg-white shadow-sm">
-                              <h3 className="font-semibold mb-2">🌟 Resumen de tu bienestar</h3>
-                              {Object.entries(aiData.user_clusters).map(([cluster, data]: any) => (
-                                <div key={cluster}>
-                                  <p>
-                                    <strong>{data.description}</strong> → ánimo promedio {data.avg_mood}, estrés promedio {data.avg_stress}
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* ✅ Recomendaciones */}
-                          {aiData.recommendations && (
-                            <div className="p-4 border rounded-lg bg-white shadow-sm">
-                              <h3 className="font-semibold mb-2">✅ Recomendaciones</h3>
-                              <ul className="list-disc list-inside text-gray-700">
-                                {aiData.recommendations.map((rec: string, idx: number) => (
-                                  <li key={idx}>{translateText(rec)}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
                         </div>
                       ) : (
                         <p className="text-gray-500">No se encontraron datos para tu análisis</p>
                       )}
                     </DialogContent>
                   </Dialog>
-
-
 
                 </div>
               </CardContent>
