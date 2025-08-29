@@ -330,29 +330,6 @@ export default function Recomendaciones() {
                 <p className="text-gray-700 mb-4">
                   Basándonos en tus respuestas recientes, te sugerimos estas actividades para mejorar tu bienestar.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-white rounded-lg shadow">
-                    <h3 className="text-sm font-semibold text-blue-700 flex items-center space-x-1">
-                      <Heart className="w-4 h-4" />
-                      <span>Estrés Actual:</span>
-                    </h3>
-                    <p className="text-lg font-bold">{userProfile.stress}/10</p>
-                  </div>
-                  <div className="p-4 bg-white rounded-lg shadow">
-                    <h3 className="text-sm font-semibold text-blue-700 flex items-center space-x-1">
-                      <Zap className="w-4 h-4 text-blue-600" />
-                      <span>Energía:</span>
-                    </h3>
-                    <p className="text-lg font-bold">{userProfile.energy}/10</p>
-                  </div>
-                  <div className="p-4 bg-white rounded-lg shadow">
-                    <h3 className="text-sm font-semibold text-blue-700 flex items-center space-x-1">
-                      <Brain className="w-4 h-4 text-purple-600" />
-                      <span>Estado de Ánimo:</span>
-                    </h3>
-                    <p className="text-lg font-bold">{userProfile.mood}/10</p>
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
