@@ -387,7 +387,7 @@ export default function Dashboard() {
               <Link href="/autodiagnostico">
                 <Button variant="outline" className="h-20 flex-col space-y-2 w-full bg-transparent">
                   <Target className="w-6 h-6" />
-                  <span className="text-xs">Autodiagnóstico</span>
+                  <span className="text-xs">Test de Ansiedad</span>
                 </Button>
               </Link>
               <Link href="/recursos">
