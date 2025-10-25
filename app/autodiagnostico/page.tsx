@@ -143,6 +143,9 @@ export default function AutodiagnosticoSRQ() {
             <p>
               Los datos serán tratados de acuerdo con la <strong>Ley 1581 de 2012</strong> y las políticas de privacidad vigentes.
             </p>
+            <a href="/Tratamiento_de_Datos_Personales_Eunonia.pdf">
+                <b>Tratamientos de datos personales</b>
+                </a>
             <p>
               ¿Desea autorizar el tratamiento de sus datos personales para realizar este autodiagnóstico?
             </p>
